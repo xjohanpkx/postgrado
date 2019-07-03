@@ -1,0 +1,30 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+//Route::resource('tesis','TesiController');
+//Route::resource('productos','ProdcutosControlle');
+
+Route::resources([
+    'tesis' => 'TesiController',
+    'productos' => 'ProductosController'
+]);
+Route::get("/mirar","TesiController@mirar");
+Route::get("/mirar/buscar","TesiController@mirabuscador");
+Route::get("/buscar/tesis","TesiController@buscar");
+Route::post("/actu","TesiController@actualizar");
+Route::get("indexb","TesiController@indexb");
+Route::get("buscar/tesis/categoria/indexc","TesiController@indexc");
+Route::get("buscar/tesis/categoria","TesiController@categoriabus");
+Route::get('/', function () {
+    return view('index');
+});
