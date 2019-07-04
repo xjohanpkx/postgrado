@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Tesi;
 use DB;
@@ -238,7 +238,15 @@ echo json_encode($data);
      */
     public function store(Request $request)
     {
+$entrada=$request->all();
+$archivo=$request->file('documento');
 
+$nombre=$archivo->getClientOriginalName();
+\Storage::disk('local')->put($nombre, \File::get($archivo));
+$archivo->move('img/repositorio',$nombre);
+$entrada['documento']=$nombre;
+Tesi::create($entrada);
+/*
     $tesis= new Tesi;
     $tesis->titulo=$request->titulo;
    $tesis->autores=$request->autores;
@@ -248,9 +256,10 @@ echo json_encode($data);
     $tesis->grado=$request->grado;
     $tesis->documento=$request->documento;
     $tesis->directorio=$request->directorio;
+*/
 
-    $tesis->save();
-    return response()->json($tesis);
+
+    return response()->json($entrada);
         //
     }
 

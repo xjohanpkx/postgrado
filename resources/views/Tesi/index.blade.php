@@ -39,7 +39,7 @@
 
 																		<!-- Contact Form Area -->
 																		<div class="insertar-form-area wow fadeInUp" style="visibility:visible; animation-name=fadeInUp;">
-																						<form action="/tesis" method="POST" id="insertar">
+																						<form action="/tesis" method="POST" id="insertar" enctype="multipart/form-data">
 																									{{ csrf_field() }}
 																								<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
 																								<input type="text" class="form-control" id="autores" name="autores" placeholder="Autores">
@@ -62,7 +62,7 @@
 
 					</div>
 				 <div class="modal-footer" style="padding-bottom: 10px; padding-top: 5px;">
-					 <button class="btn insertar-btn" type="submit" id="insertarb" form="insertar">Subir</button>
+					 <button class="btn insertar-btn" type="submit" form="insertar" id="insertarb">Subir</button>
 
 						</div>
 						</div>

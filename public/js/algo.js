@@ -55,19 +55,17 @@ $("#gradoview").append(res.grado);
 //insertar una nueva tesis
 		$(document).on('click','#insertarb',function(e){
 				e.preventDefault();
+				var doc= new FormData($("#insertar")[0]);
+				var token=$('input[name=_token]').val(),
 	remove_url ='/tesis';
 				$.ajax({
 					type:'post',
+					cache:false,
+					contentType: false,
+					processData: false,
+					headers:{'X-CSRF-TOKEN':token},
 					url: remove_url,
-					data:{
-						'_token':$('input[name=_token').val(),
-						'titulo':$('input[name=titulo').val(),
-            'autores':$('input[name=autores').val(),
-            'instituto':$('input[name=instituto').val(),
-            'fecha':$('input[name=fecha').val(),
-            'resumen':$('#resumen').val(),
-            'grado':$('#grado').val(),
-					},
+					data:doc,
 					success:function(data){
 						//	window.location.reload();
 						$("#cerrar_ac").click();
