@@ -68,6 +68,7 @@ $("#gradoview").append(res.grado);
 					data:doc,
 					success:function(data){
 						//	window.location.reload();
+						$('#insertarb')[0].reset();
 						$("#cerrar_ac").click();
 							$('#contenidoa').load('mirar');
 					},
@@ -75,12 +76,14 @@ $("#gradoview").append(res.grado);
 			});
 
 //para enviar el form de la actualizacion tesis
-			$(document).on('click','#modificar',function(){
+			$(document).on('click','#modificar',function(e){
+				e.preventDefault();
 
 				var value = $("#idup").val();
 				var dato = $("#tituloup").val();
 				var route = "http://127.0.0.1:8000/tesis/"+value+"";
 				var token = $("#token").val();
+				var file = $('#documentoup')[0].files[0].name
 
 				$.ajax({
 					url: route,
@@ -94,7 +97,8 @@ $("#gradoview").append(res.grado);
 						'fecha':$('input[name=fechaup').val(),
 						'resumen':$('#resumenup').val(),
             'grado':$('#gradoup').val(),
-				},
+						'documento':file,
+					},
 					success: function(){
 						carga();
 						$("#updatemodal").modal('toggle');
@@ -102,8 +106,30 @@ $("#gradoview").append(res.grado);
 					}
 				});
 			});
+//modifica el documento solamente de la tesis
+			$(document).on('click','#modificar',function(e){
+			  e.preventDefault();
+			  var doc= new FormData($("#modificarb")[0]);
+			  doc.append('_method','put');
+			  var value = $("#idup").val();
+			  var dato = $("#tituloup").val();
+			  var route = "http://127.0.0.1:8000/file/"+value+"";
+			  var token = $("#token").val();
 
-
+			  $.ajax({
+			    url: route,
+			    headers: {'X-CSRF-TOKEN': token},
+			    type: 'POST',
+			    cache:false,
+			    contentType: false,
+			    processData: false,
+			    dataType: 'json',
+			    data:doc,
+			    success: function(){
+			      alert(exito);
+			    }
+			  });
+			});
 //eliminar una tesis
 
 

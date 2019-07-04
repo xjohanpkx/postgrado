@@ -17,7 +17,7 @@
 
 																		<!-- Contact Form Area -->
 																		<div class="insertar-form-area wow">
-																						<form>
+																						<form action="/tesis" method="post" id="modificarb" enctype="multipart/form-data">
 																									{{ csrf_field() }}
 																								<input type="hidden" name="_method"	value="PUT">
 																								<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
@@ -33,7 +33,7 @@
 																									<option class="form-control" value="doctorado">Doctorado</option>
 																									<option class="form-control"  value="diplomado">Diplomado</option>
 																								</select>
-																								<input type="file" name="documento" id="documentoup" class="form-control" placeholder="Documento">
+																								<input type="file" name="documentoup" id="documentoup" class="form-control" placeholder="Documento">
 	 </form>
 																				</div>
 														</div>
@@ -43,7 +43,7 @@
 
 					</div>
 				 <div class="modal-footer" style="padding-bottom: 10px; padding-top: 5px;">
-					 <button class="btn insertar-btn"  id="modificar">Modificar</button>
+					 <button class="btn insertar-btn" type="submit" form="modificarb" id="modificar">Modificar</button>
 
 						</div>
 						</div>

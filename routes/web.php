@@ -23,8 +23,10 @@ Route::get("/mirar/buscar","TesiController@mirabuscador");
 Route::get("/buscar/tesis","TesiController@buscar");
 Route::post("/actu","TesiController@actualizar");
 Route::get("indexb","TesiController@indexb");
-Route::get("buscar/tesis/categoria/indexc","TesiController@indexc");
+Route::get("/mirar/descargar/{id}","TesiController@descargardoc");
 Route::get("buscar/tesis/categoria","TesiController@categoriabus");
+Route::put("file/{tesi}","TesiController@updatefile");
+
 Route::get('/', function () {
     return view('index');
 });

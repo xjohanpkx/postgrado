@@ -101,8 +101,8 @@ return response()->json(view ("Tesi/modal.buscartesis",compact('data'))->render(
                   									<blockquote>
                   									<p style="text-align: justify; color: hsl(11, 1%, 92%);">	Por:'.$tesi->autores.'</p>
                   									</blockquote>
-                  	<input type="hidden" name="_token" value="'.csrf_token().'" id="token2">
-                  		<a href="#" class="algo"  title="Descargar"  >	<i style=" color: #83c331;" class="fa fa-download fa-2x"></i></a>
+                  	<input type="hidden" name="_token" value="'.csrf_token().'"  id="token2">
+                  		<a href="http://127.0.0.1:8000/mirar/descargar/'.$tesi->id.'" class="algo"  title="Descargar" name="'.$tesi->id.'" >	<i style=" color: #83c331;" class="fa fa-download fa-2x"></i></a>
                   		<a href="#" class="esto" title="más Información" name="'.$tesi->id.'"  data-target="#moreinfomodal" data-toggle="modal"  onclick="infotesi(this)">	<i style="color:#61ba6d;" class=" fa fa-search-plus  fa-2x"></i></a>
 
                   		<a href="#" class="modi" title="Modificar"  name="'.$tesi->id.'"  data-target="#updatemodal" data-toggle="modal"  onclick="mostrar(this)" >	<i style="color:#61ba6d;" class="fa fa-pencil fa-2x"></i></a>
@@ -187,7 +187,7 @@ echo json_encode($data);
               									<p style="text-align: justify; color: hsl(11, 1%, 92%);">	Por:'.$tesi->autores.'</p>
               									</blockquote>
               	<input type="hidden" name="_token" value="'.csrf_token().'" id="token2">
-              		<a href="#" class="algo"  title="Descargar"  >	<i style=" color: #83c331;" class="fa fa-download fa-2x"></i></a>
+              			<a href="http://127.0.0.1:8000/mirar/descargar/'.$tesi->id.'" class="algo"  title="Descargar" name="'.$tesi->id.'" >	<i style=" color: #83c331;" class="fa fa-download fa-2x"></i></a>
               		<a href="#" class="esto" title="más Información" name="'.$tesi->id.'"  data-target="#moreinfomodal" data-toggle="modal"  onclick="infotesi(this)">	<i style="color:#61ba6d;" class=" fa fa-search-plus  fa-2x"></i></a>
 
               		<a href="#" class="modi" title="Modificar"  name="'.$tesi->id.'"  data-target="#updatemodal" data-toggle="modal"  onclick="mostrar(this)" >	<i style="color:#61ba6d;" class="fa fa-pencil fa-2x"></i></a>
@@ -242,7 +242,7 @@ $entrada=$request->all();
 $archivo=$request->file('documento');
 
 $nombre=$archivo->getClientOriginalName();
-\Storage::disk('local')->put($nombre, \File::get($archivo));
+//\Storage::disk('local')->put($nombre, \File::get($archivo));
 $archivo->move('img/repositorio',$nombre);
 $entrada['documento']=$nombre;
 Tesi::create($entrada);
@@ -314,12 +314,33 @@ return response()->json($tesis);
     public function update(Request $request, $id)
     {
         //
+
+
         $Tesi=Tesi::find($id);
         $Tesi->fill($request->all());
         $Tesi->save();
         return response()->json();
 
     }
+
+     public function updatefile(Request $request, $id)
+      {
+          //
+          $Tesiold=Tesi::find($id);
+          $archivo=$request->file('documentoup');
+          $carpeta="img/repositorio";
+          $nombre=$archivo->getClientOriginalName();
+          $fileregistro = new Tesi;
+          $fileregistro->documento =$nombre;
+
+        //  \Storage::disk('local')->put($nombre, \File::get($archivo));
+          $archivo->move('img/repositorio',$nombre);
+        //  $entrada['documento']=$nombre;
+          $Tesiold->fill($request->all());
+
+          return response()->json();
+
+      }
 
     /**
      * Remove the specified resource from storage.
@@ -333,4 +354,15 @@ return response()->json($tesis);
       $tesi->delete();
       return response()->json(["mensaje"=>"borrado"]);
     }
+
+
+    public function descargardoc($id)
+    {
+     $tesi=Tesi::findOrFail($id);
+      $nombre=$tesi->documento;
+      $file= public_path(). "/img/repositorio/".$nombre."";
+      return response()->download($file);
+
+    }
+
 }
