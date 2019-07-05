@@ -364,6 +364,7 @@ return response()->json($tesis);
     public function destroy($id)
     {
       $tesi=Tesi::findOrFail($id);
+      unlink($tesi->directorio);
       $tesi->delete();
       return response()->json(["mensaje"=>"borrado"]);
     }
