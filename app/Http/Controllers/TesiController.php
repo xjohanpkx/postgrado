@@ -242,9 +242,11 @@ $entrada=$request->all();
 $archivo=$request->file('documento');
 
 $nombre=$archivo->getClientOriginalName();
+  $carpeta="img/repositorio/".$nombre."";
 //\Storage::disk('local')->put($nombre, \File::get($archivo));
 $archivo->move('img/repositorio',$nombre);
 $entrada['documento']=$nombre;
+$entrada['directorio']=$carpeta;
 Tesi::create($entrada);
 /*
     $tesis= new Tesi;
@@ -296,6 +298,34 @@ return response()->json($tesis);
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     public function updatefile(Request $request, $id)
+      {
+          //
+          $Tesiold=Tesi::find($id);
+
+          //$Tesiold->delete();
+          $archivo=$request->file('documentoup');
+            $nombre=$archivo->getClientOriginalName();
+          $carpeta="img/repositorio/".$nombre;
+        /*  $fileregistro = new Tesi;
+          $fileregistro->documento =$nombre;
+          $fileregistro->directorio=$carpeta;
+  */
+        //  \Storage::disk('local')->put($nombre, \File::get($archivo));
+          $archivo->move('img/repositorio',$nombre);
+        //  $entrada['documento']=$nombre;
+
+          $Tesiold->fill($request->all());
+  $Tesiold->save();
+
+          return response()->json();
+
+      }
+
+
+
+
     public function edit($id)
     {
         //
@@ -315,32 +345,15 @@ return response()->json($tesis);
     {
         //
 
-
         $Tesi=Tesi::find($id);
+        unlink($Tesi->directorio);
         $Tesi->fill($request->all());
         $Tesi->save();
         return response()->json();
 
     }
 
-     public function updatefile(Request $request, $id)
-      {
-          //
-          $Tesiold=Tesi::find($id);
-          $archivo=$request->file('documentoup');
-          $carpeta="img/repositorio";
-          $nombre=$archivo->getClientOriginalName();
-          $fileregistro = new Tesi;
-          $fileregistro->documento =$nombre;
 
-        //  \Storage::disk('local')->put($nombre, \File::get($archivo));
-          $archivo->move('img/repositorio',$nombre);
-        //  $entrada['documento']=$nombre;
-          $Tesiold->fill($request->all());
-
-          return response()->json();
-
-      }
 
     /**
      * Remove the specified resource from storage.
