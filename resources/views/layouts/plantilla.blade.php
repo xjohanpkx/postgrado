@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
@@ -27,27 +27,6 @@
       <i class="circle-preloader"></i>
   </div>
 
-  <!-- Modal / Ventana / Overlay en HTML -->
-  <div id="freddymodal" class="modal fade">
-      <div class="modal-dialog" style="width: 300px;">
-          <div class="modal-content">
-              <div class="modal-header" style="height:10px; padding: 6px 15px 14px 10px">
-  				<button style="height: 4px; width: -5px; padding-bottom: 10px;" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                 </div>
-              <div class="modal-body" style="padding-bottom: 2px; padding-top: 10px;">
-        <form action="" method="post">
-  		<input class="form-control" placeholder="Usuario" type="text">
-  		 <input class="form-control" placeholder="Contraseña" type="password">
-  		    </form>
-  		  </div>
-       <div class="modal-footer" style="padding-bottom: 10px; padding-top: 5px;">
-                  <button type="button" class="btn btn-success">Ingresar</button>
-
-  				</div>
-          </div>
-      </div>
-  </div>
-
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
 @yield('cabecera')
@@ -58,7 +37,7 @@
                     <div class="col-12 h-100">
                         <div class="header-content h-100 d-flex align-items-center justify-content-between">
                             <div class="academy-logo">
-                                <a href="index.html"><img src="../img/bg-img/logoweb1.png" alt=""></a>
+                                <a href="/"><img src="../img/bg-img/logoweb1.png" alt=""></a>
                             </div>
 
                         </div>
@@ -146,10 +125,19 @@ cursor: default;">Maestrìa</a></li>
 
                         <!-- Calling Info -->
                         <div class="calling-info">
-
                                 <div class="call-center">
-                                <a href="#freddymodal" data-toggle="modal"><i class="fa fa-sign-in"></i> <span>Iniciar Sección</span></a>
+                                  @if (Route::has('login'))
+                                      <div class="top-right links">
+                                          @auth
+                                              <a href="{{ url('/tesis') }}"><i class="fa fa-wrench"></i>Administrar</a>
+                                          @else
+                                              <a href="#freddymodal" data-toggle="modal"><i class="fa fa-sign-in"></i> <span>Iniciar Sección</span></a>
 
+                                              @if (Route::has('register'))
+                                              @endif
+                                          @endauth
+                                      </div>
+                                  @endif
                             </div>
                         </div>
                     </nav>
@@ -158,6 +146,57 @@ cursor: default;">Maestrìa</a></li>
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
+
+
+    <!-- Modal / Ventana / Overlay en HTML -->
+    <div id="freddymodal" class="modal fade">
+        <div class="modal-dialog" style="width: 300px;">
+            <div class="modal-content">
+                <div class="modal-header" style="height:10px; padding: 6px 15px 14px 10px">
+    				<button style="height: 4px; width: -5px; padding-bottom: 10px;" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                   </div>
+                <div class="modal-body" style="padding-bottom: 2px; padding-top: 10px;">
+
+          <form action="{{ route('login') }}" method="post" id="loginnew">
+                    @csrf
+    	<input id="email" type="email" placeholder="E-mail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+        @error('email')
+            <span class="invalid-feedback" role="alert">
+            <script type="text/javascript">alert("
+  Estas credenciales no coinciden con nuestros registros.") </script>
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    		<input id="password" type="password" placeholder="Contraseña" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+         @error('password')
+             <span class="invalid-feedback" role="alert">
+                 <strong>{{ $message }}</strong>
+                 <script type="text/javascript">alert("
+       Estas credenciales no coinciden con nuestros registros.") </script>
+             </span>
+         @enderror
+
+      </form>
+    		  </div>
+         <div class="modal-footer" style="padding-bottom: 10px; padding-top: 5px;">
+           <div class="form-check">
+
+               <input form="loginew" class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+               <label class="form-check-label" for="remember">
+                   Recordar
+               </label>
+           </div>
+                 <button type="submit" form="loginnew" class="btn academy-btn btn-5 m-2">Ingresar</button>
+
+    				</div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 
 
 

@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Producto;
 
-class ProductosController extends Controller
+class InicioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +14,8 @@ class ProductosController extends Controller
     public function index()
     {
         //
+
+        return view("index");
     }
 
     /**
@@ -24,7 +25,7 @@ class ProductosController extends Controller
      */
     public function create()
     {
-      return view('Productos.create');
+        //
     }
 
     /**
@@ -35,11 +36,7 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-      $producto= new Producto;
-
-      $producto->nombre=$request->nombre;
-
-      $producto->save();
+        //
     }
 
     /**

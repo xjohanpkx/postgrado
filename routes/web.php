@@ -16,7 +16,7 @@
 
 Route::resources([
     'tesis' => 'TesiController',
-    'productos' => 'ProductosController'
+    'inicio' => 'InicioController'
 ]);
 Route::get("/mirar","TesiController@mirar");
 Route::get("/mirar/buscar","TesiController@mirabuscador");
@@ -27,6 +27,9 @@ Route::get("/mirar/descargar/{id}","TesiController@descargardoc");
 Route::get("buscar/tesis/categoria","TesiController@categoriabus");
 Route::put("file/{tesi}","TesiController@updatefile");
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/',"InicioController@index");
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
