@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Tesi;
 use DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Route;
 class TesiController extends Controller
 {
@@ -241,16 +242,46 @@ echo json_encode($data);
      */
     public function store(Request $request)
     {
-$entrada=$request->all();
-$archivo=$request->file('documento');
+      $validar=validator::make($request->all(),[
+        'titulo'=>'required',
+        'documento'=>'required|mimes:pdf',
 
-$nombre=$archivo->getClientOriginalName();
+      ]);
+
+if($validar->passes()){
+
+  $entrada=$request->all();
+  $archivo=$request->file('documento');
+  $nombre=$archivo->getClientOriginalName();
   $carpeta="img/repositorio/".$nombre."";
-//\Storage::disk('local')->put($nombre, \File::get($archivo));
+
+$data=DB::table('tesis')->where('documento','like',$nombre)->get();
+
+if(count($data)>=1){
+return response()->json(['success'=>'Registro ya existe']);
+
+}else{
 $archivo->move('img/repositorio',$nombre);
 $entrada['documento']=$nombre;
 $entrada['directorio']=$carpeta;
+
 Tesi::create($entrada);
+
+return response()->json(['success'=>'Registro Agregado']);
+}
+
+
+}else{
+return response()->json(['error'=>$validar->errors()->all()]);
+
+}
+
+
+
+
+
+//\Storage::disk('local')->put($nombre, \File::get($archivo));
+
 /*
     $tesis= new Tesi;
     $tesis->titulo=$request->titulo;
@@ -264,7 +295,7 @@ Tesi::create($entrada);
 */
 
 
-    return response()->json($entrada);
+
         //
     }
 
@@ -349,7 +380,12 @@ return response()->json($tesis);
         //
 
         $Tesi=Tesi::find($id);
+        $archivo=$request->documentopv;
+        $archivo2=$Tesi->documento;
+        if($archivo!="nulo"){
         unlink($Tesi->directorio);
+      //  $tesi->documento=$archivo2;
+      }
         $Tesi->fill($request->all());
         $Tesi->save();
         return response()->json();
