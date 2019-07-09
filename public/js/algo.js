@@ -1,12 +1,5 @@
 $(document).ready(function(){
 			// for Insert Ajax
-			function mensajeerror (msg) {
-					$(".print-error-msg").find("ul").html('');
-					$(".print-error-msg").css('display','block');
-					$.each( msg, function( key, value ) {
-						$(".print-error-msg").find("ul").append('<li>'+value+'</li>');
-					});
-				}
 
 });
 
@@ -62,6 +55,7 @@ $("#gradoview").append(res.grado);
 //insertar una nueva tesis
 		$(document).on('click','#insertarb',function(e){
 				e.preventDefault();
+			alertify.confirm("Esta seguro de registrar una nueva Tesis?",function(){
 				var doc= new FormData($("#insertar")[0]);
 				var token=$('input[name=_token]').val(),
 	remove_url ='/tesis';
@@ -79,31 +73,38 @@ $("#gradoview").append(res.grado);
 						if($.isEmptyObject(data.error)){
 										$("#cerrar_ac").click();
 											$('#contenidoa').load('mirar');
-
-			                	alert(data.success);
+			                alertify.success(data.success);
 			                }else{
-			                	alert(data.error);
-			                }
+							                	alertify.error(data.error);
+																			                }
 					},
 				});
 			}else{
-				alert("El Documento es requerido");
+				alertify.error("El Documento es obligatorio");
 			}
-
+});
 			});
 
 
-			//modifica el documento solamente de la tesis
+
 						$(document).on('click','#modificar',function(e){
+	//modifica el documento solamente de la tesis
 						  e.preventDefault();
+
+					alertify.confirm("Esta seguro de Modificar esta Tesis?",function(){
+
 						  var doc= new FormData($("#modificarb")[0]);
 						  doc.append('_method','put');
 						  var value = $("#idup").val();
 						  var dato = $("#tituloup").val();
 						  var route = "http://127.0.0.1:8000/file/"+value+"";
+							var route2 = "http://127.0.0.1:8000/tesis/"+value+"";
 						  var token = $("#token").val();
 							var files = $('#documentoup')[0].files.length;
+
 					if(files>0){
+
+						//ajax solo documento con FormData
 								$.ajax({
 									url: route,
 									headers: {'X-CSRF-TOKEN': token},
@@ -113,91 +114,88 @@ $("#gradoview").append(res.grado);
 									processData: false,
 									dataType: 'json',
 									data:doc,
-									success: function(){
+									success: function(data){
+										if($.isEmptyObject(data.error)){
+													}else{
+															alertify.error(data.error);
 
+															}
 									}
 								});
+//para enviar el form de la actualizacion tesis
+								//ajax string del fomrulrio actualizar
+									var file = $('#documentoup')[0].files[0].name
+									var carpeta="img/repositorio/"+file+"";
+var pdffile=file.slice(-3);
+	if(pdffile=="pdf"){
+												$.ajax({
+													url: route2,
+													headers: {'X-CSRF-TOKEN': token},
+													type: 'PUT',
+													dataType: 'json',
+													data: {
+														'titulo':$('input[name=tituloup').val(),
+														'autores':$('input[name=autoresup').val(),
+														'instituto':$('input[name=institutoup').val(),
+														'fecha':$('input[name=fechaup').val(),
+														'resumen':$('#resumenup').val(),
+														'grado':$('#gradoup').val(),
+														'documento':file,
+														'directorio':carpeta,
+													},
+													success: function(data){
+														if($.isEmptyObject(data.error)){
+																$("#updatemodal").modal('toggle');
+																			carga();
+																			alertify.success(data.success);
+																			}else{
+
+																			alertify.error(data.error);
+																			}
+
+													}
+												});
+}
 							}else{
 
-								alert("sss");
+//ajax actualizacion de formulario string sin documento
+											$.ajax({
+												url: route2,
+												headers: {'X-CSRF-TOKEN': token},
+												type: 'PUT',
+												dataType: 'json',
+												data: {
+													'titulo':$('input[name=tituloup').val(),
+													'autores':$('input[name=autoresup').val(),
+													'instituto':$('input[name=institutoup').val(),
+													'fecha':$('input[name=fechaup').val(),
+													'resumen':$('#resumenup').val(),
+													'grado':$('#gradoup').val(),
+													'documentopv':"nulo",
+												},
+												success: function(data){
+													if($.isEmptyObject(data.error)){
+															$("#updatemodal").modal('toggle');
+																		carga();
+																		alertify.success(data.success);
+																		}else{
+
+																		alertify.error(data.error);
+																		}
+
+												}
+											});
 							}
+});
+					});
 
-						});
-
-
-
-
-//para enviar el form de la actualizacion tesis
-			$(document).on('click','#modificar',function(e){
-				e.preventDefault();
-
-				var value = $("#idup").val();
-				var dato = $("#tituloup").val();
-				var route = "http://127.0.0.1:8000/tesis/"+value+"";
-				var token = $("#token").val();
-
-var files = $('#documentoup')[0].files.length;
-
-	if(files>0){
-		var file = $('#documentoup')[0].files[0].name
-				var carpeta="img/repositorio/"+file+"";
-				$.ajax({
-					url: route,
-					headers: {'X-CSRF-TOKEN': token},
-					type: 'PUT',
-					dataType: 'json',
-					data: {
-						'titulo':$('input[name=tituloup').val(),
-						'autores':$('input[name=autoresup').val(),
-						'instituto':$('input[name=institutoup').val(),
-						'fecha':$('input[name=fechaup').val(),
-						'resumen':$('#resumenup').val(),
-            'grado':$('#gradoup').val(),
-						'documento':file,
-						'directorio':carpeta,
-					},
-					success: function(){
-						carga();
-						$("#updatemodal").modal('toggle');
-
-					}
-				});
-			}else{
-
-				$.ajax({
-					url: route,
-					headers: {'X-CSRF-TOKEN': token},
-					type: 'PUT',
-					dataType: 'json',
-					data: {
-						'titulo':$('input[name=tituloup').val(),
-						'autores':$('input[name=autoresup').val(),
-						'instituto':$('input[name=institutoup').val(),
-						'fecha':$('input[name=fechaup').val(),
-						'resumen':$('#resumenup').val(),
-            'grado':$('#gradoup').val(),
-						'documentopv':"nulo",
-					},
-					success: function(){
-						carga();
-						$("#updatemodal").modal('toggle');
-
-					}
-				});
-
-
-
-
-				}
-
-			});
 
 //eliminar una tesis
 
 
 $(document).on('click','#eliminartes',function(){
 	var id=$(this).attr('name');
-
+	alertify.confirm("Esta seguro de Eliminar esta Tesis?",function(){
 	var route = "http://127.0.0.1:8000/tesis/"+id+"";
 	var token = $("#token2").val();
 
@@ -206,11 +204,12 @@ $(document).on('click','#eliminartes',function(){
 		headers: {'X-CSRF-TOKEN': token},
 		type: 'DELETE',
 		dataType: 'json',
-		success: function(){
+		success: function(data){
 carga();
-
+alertify.success(data.success);
 		}
 	});
+});
 });
 
 $(document).on('click','.pagination a',function(e){

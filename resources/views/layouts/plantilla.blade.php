@@ -17,6 +17,8 @@
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../js/alertifyjs/css/alertify.css">
+		<link rel="stylesheet" href="../js/alertifyjs/css/themes/default.css">
 
 </head>
 
@@ -331,6 +333,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos
     <script src="../js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="../js/active.js"></script>
+
+    <script src="../js/alertifyjs/alertify.js"></script>
     </div>
 </body>
 

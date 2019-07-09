@@ -244,8 +244,10 @@ echo json_encode($data);
     {
       $validar=validator::make($request->all(),[
         'titulo'=>'required',
+        'fecha'=>'required',
+        'resumen'=>'required',
+        'grado'=>'required',
         'documento'=>'required|mimes:pdf',
-
       ]);
 
 if($validar->passes()){
@@ -258,7 +260,7 @@ if($validar->passes()){
 $data=DB::table('tesis')->where('documento','like',$nombre)->get();
 
 if(count($data)>=1){
-return response()->json(['success'=>'Registro ya existe']);
+return response()->json(['success'=>'El registro ya existe']);
 
 }else{
 $archivo->move('img/repositorio',$nombre);
@@ -272,7 +274,11 @@ return response()->json(['success'=>'Registro Agregado']);
 
 
 }else{
-return response()->json(['error'=>$validar->errors()->all()]);
+
+foreach ($validar->errors()->all() as $message) {
+
+  return response()->json(['error'=>$message]);
+}
 
 }
 
@@ -336,6 +342,11 @@ return response()->json($tesis);
      public function updatefile(Request $request, $id)
       {
           //
+
+          $validar=validator::make($request->all(),[
+            'documentoup'=>'mimes:pdf',
+          ]);
+if($validar->passes()){
           $Tesiold=Tesi::find($id);
 
           //$Tesiold->delete();
@@ -354,7 +365,13 @@ return response()->json($tesis);
   $Tesiold->save();
 
           return response()->json();
+}else{
+  foreach ($validar->errors()->all() as $message) {
 
+    return response()->json(['error'=>$message]);
+  }
+
+}
       }
 
 
@@ -377,7 +394,7 @@ return response()->json($tesis);
      */
     public function update(Request $request, $id)
     {
-        //
+
 
         $Tesi=Tesi::find($id);
         $archivo=$request->documentopv;
@@ -388,9 +405,11 @@ return response()->json($tesis);
       }
         $Tesi->fill($request->all());
         $Tesi->save();
-        return response()->json();
+    return response()->json(['success'=>'Registro Modificado']);
 
-    }
+
+}
+
 
 
 
@@ -405,7 +424,7 @@ return response()->json($tesis);
       $tesi=Tesi::findOrFail($id);
       unlink($tesi->directorio);
       $tesi->delete();
-      return response()->json(["mensaje"=>"borrado"]);
+      return response()->json(["success"=>"Tesis borrada"]);
     }
 
 
