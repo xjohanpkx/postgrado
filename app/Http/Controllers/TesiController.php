@@ -222,9 +222,7 @@ echo json_encode($data);
               ';
 
             }else{
-            $output='  <tr>
-        <td align="center" colspan="5">Busqueda no encontrada</td>
-       </tr>';
+            $output='none';
 
             }
             $data=array('table_data'=>$output);

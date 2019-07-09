@@ -29,7 +29,7 @@
 						<div class="modal-header">
 				<button style="padding-left:-10px;"  type="button" class="close" id="cerrar_ac" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times" style="color:#61ba6d"></i></button>
 							 </div>
-						<div class="modal-body" style="padding-bottom: 2px; padding-top: 20px;">
+						<div class="modal-body" id="bodycreatemodal" style="padding-bottom: 2px; padding-top: 20px;">
 
 							<!-- ##### Contact Area Start ##### -->
 						<section class="contact-area">
@@ -38,7 +38,7 @@
 														<div class="insertar-content">
 
 																		<!-- Contact Form Area -->
-																		<div class="insertar-form-area wow fadeInUp" style="visibility:visible; animation-name=fadeInUp;">
+																		<div class="insertar-form-area">
 																						<form action="/tesis" method="POST" id="insertar" enctype="multipart/form-data">
 																									{{ csrf_field() }}
 																								<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo">
@@ -144,7 +144,7 @@
 																		</ul>
 														</div>
 														<div class="blog-post-categories mb-80">
-												<a href="#createmodal" role="button" class="btn academy-btn btn-5 m-5" data-toggle="modal">Nueva Tesis</a>
+												<a href="#createmodal" id="botoncreatemodal" role="button" class="btn academy-btn btn-5 m-5" data-toggle="modal">Nueva Tesis</a>
 														</div>
 
 														<!-- Add Widget -->

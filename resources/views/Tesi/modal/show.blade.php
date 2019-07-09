@@ -9,7 +9,7 @@
 							 </div>
 						<div class="modal-body" style="padding-bottom: 2px; padding-top: 2px;">
 
-              <div class="single-blog-post mb-50 wow fadeInUp" data-wow-delay="300ms">
+              <div class="single-blog-post mb-50">
                   <!-- Post Thumb -->
 
                   <!-- Post Title -->

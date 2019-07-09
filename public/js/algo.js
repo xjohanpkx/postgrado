@@ -3,6 +3,7 @@ $(document).ready(function(){
 
 });
 
+
 //modal para actualizar tesis
 
 function mostrar(btn){
@@ -278,8 +279,11 @@ function buscar_continuos(query = '')
    dataType:'json',
    success:function(data)
    {
+		 		 if(data.table_data=="none"){
+			 alertify.error("No se encontro la busqueda");
+		 }else{
     $('#contenidoa').html(data.table_data);
-   }
+	}}
   })
  }
 

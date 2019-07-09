@@ -16,7 +16,7 @@
 														<div class="insertar-content">
 
 																		<!-- Contact Form Area -->
-																		<div class="insertar-form-area wow">
+																		<div class="insertar-form-area">
 																						<form action="/tesis" method="post" id="modificarb" enctype="multipart/form-data">
 																									{{ csrf_field() }}
 																								<input type="hidden" name="_method"	value="PUT">
