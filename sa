@@ -1,0 +1,53 @@
+[33mcommit 557ceb3c5908b3daee7ca0e4708df66cf64158cf[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: xjohanpkx <freddy.johan@hotmail.com>
+Date:   Mon Jul 8 21:58:32 2019 -0400
+
+    crud tesis listo, por fin!
+
+[33mcommit a53429b4225dcd8aa0c30615765a0efe70c5de26[m
+Author: xjohanpkx <freddy.johan@hotmail.com>
+Date:   Mon Jul 8 22:08:33 2019 -0400
+
+    falta validacion de campo busqueda, del resto todo perfecto
+
+[33mcommit 63cd0a99702b1f655d41bc3700802b5da1156781[m
+Author: xjohanpkx <freddy.johan@hotmail.com>
+Date:   Mon Jul 8 22:19:22 2019 -0400
+
+    valñidaciones realizadas, falta extender validaciones a otras funciones
+
+[33mcommit 5e044eeb4266a7b33d42a9298389ae20dfa544e5[m
+Author: xjohanpkx <freddy.johan@hotmail.com>
+Date:   Sun Jul 7 07:19:36 2019 -0400
+
+    modificaciones necesarias mas un aut
+
+[33mcommit 1312b0cb86babf545f738c71645225fb0aa0807e[m
+Author: xjohanpkx <freddy.johan@hotmail.com>
+Date:   Fri Jul 5 13:03:27 2019 -0400
+
+    crud listo excepto los parametros de requisitos
+
+[33mcommit ee17dbae983af1309d9a18d003a8d0d93e132b49[m
+Author: xjohanpkx <freddy.johan@hotmail.com>
+Date:   Fri Jul 5 12:53:49 2019 -0400
+
+    modifica bien falta delete
+
+[33mcommit 231285c63cf17847ee1fb00c189318c50f8d5e02[m
+Author: xjohanpkx <freddy.johan@hotmail.com>
+Date:   Thu Jul 4 17:06:55 2019 -0400
+
+    crud terminado , falta las validaciones y acomodar los url teniendo referencia el index de tesis para descargar los docuemntos
+
+[33mcommit 94b7eca911eca1fd614cc595efd603820a69f2a0[m
+Author: xjohanpkx <freddy.johan@hotmail.com>
+Date:   Thu Jul 4 00:15:50 2019 -0400
+
+    crud casi lsito , falta recuperacion y dowload de archivo
+
+[33mcommit 077dee3ec5652f6ab617436dc7ec44a8944e13cd[m
+Author: xjohanpkx <freddy.johan@hotmail.com>
+Date:   Wed Jul 3 08:26:55 2019 -0400
+
+    resubida por perdida de datos

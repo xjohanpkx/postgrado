@@ -16,11 +16,14 @@
 
 Route::resources([
     'tesis' => 'TesiController',
-    'inicio' => 'InicioController'
+    'inicio' => 'InicioController',
+    'noticia'=> 'NoticiaController'
 ]);
 Route::get("/mirar","TesiController@mirar");
+Route::get("/mirarnot","NoticiaController@mirar");
 Route::get("/mirar/buscar","TesiController@mirabuscador");
 Route::get("/buscar/tesis","TesiController@buscar");
+Route::get("/buscar/noticia","NoticiaController@buscar");
 Route::post("/actu","TesiController@actualizar");
 Route::get("indexb","TesiController@indexb");
 Route::get("/mirar/descargar/{id}","TesiController@descargardoc");

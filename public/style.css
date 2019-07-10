@@ -370,7 +370,7 @@ img {
       background: #69bc5f;
       color: #ffffff; }
 
-.academy-btn.btn-5 {
+.academy-btn.btn-6 {
     background: #ffffff;
     border: 2px solid #69bc5f;
     color: #606060;
@@ -382,6 +382,20 @@ img {
     .academy-btn.btn-5:hover, .academy-btn.btn-4:focus {
       background: #69bc5f;
       color: #ffffff; }
+
+      .academy-btn.btn-6 {
+          background: #ffffff;
+          border: 2px solid #69bc5f;
+          color: #606060;
+      	  height:30px;
+            	  padding: 3px;
+          width: 100%;
+      	  line-height: 20px;
+
+      }
+          .academy-btn.btn-6:hover, .academy-btn.btn-4:focus {
+            background: #69bc5f;
+            color: #ffffff; }
 
 /* Header Area CSS */
 .header-area {
@@ -1538,6 +1552,14 @@ top: 180px;
   left: 55%;
   top: 180px;
 }
+.modinot{
+  vertical-align: inherit;
+}
+
+.delnot{
+vertical-align: inherit;
+margin-left: 20px;
+}
 
 .block-2 .back .fac{
 margin: 300px 30px 20px 50px;
@@ -1583,3 +1605,41 @@ margin: 300px 30px 20px 50px;
   }
 
 }
+
+.notiform input{
+font-size   : 100%;
+border:none;
+margin:0;
+background: none;
+outline: none;
+width: 70%;
+rol:2;
+
+}
+.notiform single-blog-post .post-meta {
+  margin-bottom: 0px; }
+  .notiform .post-meta input {
+    font-size: 12px;
+    color: #69bc5f;
+    margin-bottom: 0;
+  width: 40%;}
+    .notiform .post-meta p a {
+      font-size: 12px;
+      color: #69bc5f;
+      font-weight: 500; }
+
+
+      .notiform textarea{
+      font-size   : 100%;
+      border:none;
+      margin:0px,20px,0,20px;
+      background: none;
+      outline: none;
+      width: 100%;
+      height  : 160px;
+      display : block;
+      resize  : none;
+      overflow: auto;
+      }
+      .notiform .blog-post-thumb input{
+        margin: 0; }

@@ -144,7 +144,7 @@
 																		</ul>
 														</div>
 														<div class="blog-post-categories mb-80">
-												<a href="#createmodal" id="botoncreatemodal" role="button" class="btn academy-btn btn-5 m-5" data-toggle="modal">Nueva Tesis</a>
+												<a href="#createmodal" id="botoncreatemodal" role="button" class="btn academy-btn btn-6" data-toggle="modal">Nueva Tesis</a>
 														</div>
 
 														<!-- Add Widget -->
