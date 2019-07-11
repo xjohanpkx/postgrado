@@ -36,17 +36,17 @@ return view ("Tesi.index",compact('global'));
   $query=$request->get('query');
   if($query=="maestria"|$query=="doctorado"){
 
-    $data=DB::table('tesis')->where('grado','like','%'.$query.'%')->paginate(2);
+    $global=DB::table('tesis')->where('grado','like','%'.$query.'%')->paginate(2);
 
 
-  return response()->json(view ("Tesi/modal.buscartesis",compact('data'))->render());
+  return response()->json(view ("Tesi/modal.mirar",compact('global'))->render());
 
 
 }else{
-      $data=DB::table('tesis')->where('titulo','like','%'.$query.'%')->paginate(2);
+      $global=DB::table('tesis')->where('titulo','like','%'.$query.'%')->paginate(2);
 
 
-return response()->json(view ("Tesi/modal.buscartesis",compact('data'))->render());
+return response()->json(view ("Tesi/modal.mirar",compact('global'))->render());
 }
 
 

@@ -27,12 +27,12 @@ class NoticiaController extends Controller
     {
         //
 
-  $global=Noticia::orderBy('fecha', 'desc')->paginate(2);
+  $global=Noticia::orderBy('fechanoti', 'desc')->paginate(2);
 
 
   if($request->Ajax()){
 
-  return response()->json(view ("Noticia/modal.mirar",compact('global'))->render());
+  return response()->json(view ("Noticia/modal.mirarnoti",compact('global'))->render());
 
   }
   return view ("Noticia.index",compact('global'));
@@ -50,7 +50,7 @@ class NoticiaController extends Controller
 
     public function mirar()
       {
-    $global=Noticia::orderBy('fecha', 'desc')->paginate(2);
+    $global=Noticia::orderBy('fechanoti', 'desc')->paginate(2);
 
       return view("Noticia/modal.mirarnoti",compact('global'));
     }
@@ -67,10 +67,10 @@ class NoticiaController extends Controller
     {
         //
         $validar=validator::make($request->all(),[
-          'titulo'=>'required',
+          'titulonoti'=>'required',
 
           'texto'=>'required',
-          'fecha'=>'required',
+          'fechanoti'=>'required',
 
         ]);
 
@@ -138,7 +138,8 @@ return response()->json(['success'=>'Registro Agregado']);
      */
     public function edit($id)
     {
-        //
+      $noticia=Noticia::find($id);
+      return response()->json($noticia->toArray());
     }
 
     /**
@@ -148,9 +149,59 @@ return response()->json(['success'=>'Registro Agregado']);
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+     public function updatefile(Request $request, $id)
+      {
+          //
+
+          $validar=validator::make($request->all(),[
+            'imagenup'=>'image|mimes:jpeg,jpg,png,gif',
+          ]);
+  if($validar->passes()){
+          $noticiaold=Noticia::find($id);
+
+          //$Tesiold->delete();
+          $archivo=$request->file('imagenup');
+            $nombre=$archivo->getClientOriginalName();
+          $carpeta="img/noticias/".$nombre;
+        /*  $fileregistro = new Tesi;
+          $fileregistro->documento =$nombre;
+          $fileregistro->directorio=$carpeta;
+  */
+        //  \Storage::disk('local')->put($nombre, \File::get($archivo));
+          $archivo->move('img/noticias',$nombre);
+        //  $entrada['documento']=$nombre;
+
+          $noticiaold->fill($request->all());
+  $noticiaold->save();
+
+          return response()->json();
+  }else{
+  foreach ($validar->errors()->all() as $message) {
+
+    return response()->json(['error'=>$message]);
+  }
+
+  }
+      }
+
+
+
+
+
     public function update(Request $request, $id)
     {
-        //
+      $noticia=Noticia::find($id);
+      $archivo=$request->imagenpv;
+      $archivo2=$noticia->imagen;
+      if($archivo!="nada" && $archivo2!="1.jpg"){
+
+      unlink($noticia->directorio);
+    //  $tesi->documento=$archivo2;
+  }
+      $noticia->fill($request->all());
+      $noticia->save();
+  return response()->json(['success'=>'Registro Modificado']);
+
     }
 
     /**
@@ -170,7 +221,7 @@ return response()->json(['success'=>'Registro Agregado']);
     }
 
 
-
+//buscar una noticia por parametros
     public function buscar(Request $request)
       {
         if($request->ajax()){
@@ -179,7 +230,7 @@ return response()->json(['success'=>'Registro Agregado']);
 
             if($query!=''){
               $data=DB::table('noticias')
-              ->where('titulo','like','%'.$query.'%')->paginate(2);
+              ->where('titulonoti','like','%'.$query.'%')->paginate(2);
 
             }else{
 
@@ -204,17 +255,16 @@ return response()->json(['success'=>'Registro Agregado']);
                            <img src="'.$noticia->directorio.'" style="max-height:300px; width:100%;" alt="">
                                 </div>
                        <!-- Post Title -->
-                       <a href="#" class="post-title">'.$noticia->titulo.'</a>
+                       <a href="#" class="post-title">'.$noticia->titulonoti.'</a>
                        <!-- Post Meta -->
                        <div class="post-meta">
 
-                           <p>Por <a href="#">'.$noticia->autor.'</a> | <a href="#">'.$noticia->fecha.'</a> |</p>
+                           <p>Por <a href="#">'.$noticia->autor.'</a> | <a href="#">'.$noticia->fechanoti.'</a> |</p>
                        </div>
                        <!-- Post Excerpt -->
-                       <p style="font-size:14px;">{{$noticia->texto}}</p>
-                       <a href="#" class="modinot mt-15" title="Modificar"  name="{{$noticia->id}}"  data-target="#updatemodal" data-toggle="modal"  onclick="mostrar(this)" >	<i style="color:#61ba6d;" class="fa fa-pencil fa-2x"></i></a>
-                         <a href="#" class="delnot" title="eliminar"  name="{{$noticia->id}}"  data-toggle="modal"  id="eliminarnoti" >	<i style="color:#61ba6d;" class="fa fa-trash fa-2x"></i></a>
-
+                       <p style="font-size:14px;">'.$noticia->texto.'</p>
+                       <a href="#" class="modinot mt-15" title="Modificar"  name="'.$noticia->id.'"  data-target="#updatemodalnoti" data-toggle="modal"  onclick="mostrarnoti(this)" >	<i style="color:#61ba6d;" class="fa fa-pencil fa-2x"></i></a>
+                         <a href="#" class="delnot" title="eliminar"  name="'.$noticia->id.'"  data-toggle="modal"  id="eliminarnoti" >	<i style="color:#61ba6d;" class="fa fa-trash fa-2x"></i></a>
                    </div>
 
 
@@ -246,9 +296,27 @@ return response()->json(['success'=>'Registro Agregado']);
     }}
 
 
+//paginacion de noticias de una busqueda realizada
+
+    public function indexb(Request $request)
+    {
+  $query=$request->get('query');
+  if($query=="maestria"|$query=="doctorado"){
+
+    $data=DB::table('noticias')->where('autor','like','%'.$query.'%')->paginate(2);
 
 
+  return response()->json(view ("Tesi/modal.buscartesis",compact('data'))->render());
 
+
+  }else{
+      $global=DB::table('noticias')->where('titulonoti','like','%'.$query.'%')->paginate(2);
+
+  return response()->json(view ("Noticia/modal.mirarnoti",compact('global'))->render());
+  }
+
+
+    }
 
 
 
