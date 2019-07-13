@@ -243,6 +243,7 @@ var mira=$(this).attr('href').split('page=')[0];
 var page=$(this).attr('href').split('page=')[1];
 var ruta="http://127.0.0.1:8000/tesis";
 var ruta2="http://127.0.0.1:8000/indexb";
+var ruta59="http://127.0.0.1:8000/info";
 alert(mira);
 if(mira=="http://127.0.0.1:8000/buscar/tesis?"|mira=="http://127.0.0.1:8000/indexb?"){
 	var valor=$("#Searchtesis").val();
@@ -307,7 +308,54 @@ $('#contenidoa').html(data);
 
 		});
 
-	}else{
+	}else if(mira=="http://127.0.0.1:8000/info?"){
+			var valor=$("#Searchtesisinicio").val();
+
+			$.ajax({
+			url:ruta59,
+			data:{page:page},
+			type:'GET',
+			dataType:'json',
+			success:function(data){
+		$('#contenidoinicio').html(data);
+			}
+
+			});
+
+		}else if(mira=="http://127.0.0.1:8000/buscar/tesis/inicio?"|mira=="http://127.0.0.1:8000/indexbinicio?"){
+				var valor=$("#Searchtesisinicio").val();
+			var ruta60="http://127.0.0.1:8000/indexbinicio?query="+valor+"";
+
+				$.ajax({
+				url:ruta60,
+				data:{page:page},
+				type:'GET',
+				dataType:'json',
+				success:function(data){
+			$('#contenidoinicio').html(data);
+				}
+
+				});
+
+			}else if(mira=="http://127.0.0.1:8000/buscar/tesis/inicio/categoria?"){
+			var valor=$("#Searchtesisinicio").val();
+
+			var ruta44="http://127.0.0.1:8000/indexbinicio?query="+valor+"";
+				alert(ruta44);
+			$.ajax({
+			url:ruta44,
+			data:{page:page},
+			type:'GET',
+			dataType:'json',
+			success:function(data){
+				$('#contenidoinicio').html(data);
+
+			}
+
+			});
+
+
+			}else{
 	$.ajax({
 	url:ruta,
 	data:{page:page},
@@ -821,3 +869,101 @@ var fun="admitidos";
 		});
 
 	});
+
+	$(document).on('click','#tesisinicio',function(){
+ruta="/info"
+var fun="tesis";
+
+		$.ajax({
+		url:ruta,
+		data:{fun:fun},
+		type:'GET',
+		dataType:'json',
+		success:function(data){
+				$("#contenedora").html(data);
+
+		}
+
+		});
+
+	});
+///FINALIZA FUNCIONES DE CARGAS*************************************************************************************************************************
+
+//buscar por campo titulo
+
+function buscar_continuosinicio(query = '')
+ {
+	 var url="/buscar/tesis/inicio";
+  $.ajax({
+   url:url,
+   method:'GET',
+   data:{query:query},
+   dataType:'json',
+   success:function(data)
+   {
+		 		 if(data.table_data=="none"){
+			 alertify.error("No se encontro la busqueda");
+		 }else{
+    $('#contenidoinicio').html(data.table_data);
+	}}
+  })
+ }
+
+	//buscar por campo titulo
+	 $(document).on('click', '#buscartesisinicio', function(e){
+		 e.preventDefault();
+	  var query = $("#Searchtesisinicio").val();
+
+	if(query==""){
+$("#tesisinicio").click();
+
+	}else{
+	  buscar_continuosinicio(query);
+
+	} });
+
+	//buscar por link de categoria
+	function categoriabusinicio (val){
+	var query=val.name;
+	$("#Searchtesisinicio").val(query);
+	buscar_categoriainicio(query);
+
+	}
+	function buscar_categoriainicio(query = '')
+	 {
+		 var url="/buscar/tesis/inicio/categoria";
+	  $.ajax({
+	   url:url,
+	   method:'GET',
+	   data:{query:query},
+	   dataType:'json',
+	   success:function(data)
+	   {
+	    $('#contenidoinicio').html(data.table_data);
+	   }
+	  })
+	 }
+
+//mostrar informacion detalla de las tesis
+	 function infotesiinicio(btn){
+
+	 var route="http://127.0.0.1:8000/inicio/"+btn.name+"";
+
+	 $.get(route,function(res){
+
+	 $("#tituloview").empty();
+	 $("#autoresview").empty();
+	 $("#fechaview").empty();
+	 $("#instiutoview").empty();
+	 $("#resumenview").empty();
+	 $("#gradoview").empty();
+
+	 $("#tituloview").append(res.titulo);
+	 $("#autoresview").append(res.autores);
+	 $("#fechaview").append(res.fecha);
+	 $("#instiutoview").append(res.instituto);
+	 $("#resumenview").append(res.resumen);
+	 $("#gradoview").append(res.grado);
+	 });
+
+	 }

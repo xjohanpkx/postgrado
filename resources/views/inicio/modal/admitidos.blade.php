@@ -20,7 +20,7 @@
                     <p>Estimado participante es para la familia de postgrado de gran agrado desearle el mayor de los exitos para que logre alcanzar la meta de su titulo de 4to nivel academico en el lapso correspondiente.</p>
                     <div class="elements-title mb-50">
                     <span>instrutivo para el proceso de inscripción</span>
-                    <a href="http://127.0.0.1:8000/pdf/descargar/1" title="Descargar" name="1" ><i style=" color: #83c331;" class="fa fa-download fa-2x"></i></a>
+                    <a href="http://127.0.0.1:8000/pdf/descargar/4" title="Descargar" name="1" ><i style=" color: #83c331;" class="fa fa-download fa-2x"></i></a>
                     </div>
                     <div class="table-responsive fadeInCenter">
 

@@ -215,6 +215,8 @@
 
     <!-- ##### Top Popular Courses Area Start ##### -->
     <div class="top-popular-courses-area section-padding-100-70"  id="contenidos">
+      @include('Tesi/modal.show')
+        <input type="hidden" id="guardagrado">
         <div class="container" id="contenedora">
 
         </div>

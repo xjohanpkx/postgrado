@@ -84,41 +84,8 @@
                                             <li><a href="#contenidos">Repositorio</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Los Más Populares</a>
-                                        <div class="megamenu">
-                                            <ul class="single-mega cn-col-4">
-												<li><a href="#" style=" justify-content: center; font-size: 16px; color:hsla(128,39%,55%,1.00); pointer-events: none;
-cursor: default;">Maestrías</a></li>
-                                               <li><a href="#">Informática</a></li>
-                                                <li><a href="#">Gerencia Educativa</a></li>
-                          											<li><a href="#">Ingeniería Mecánica</a></li>
-                                                <li><a href="#">Ingeniería Electrónica</a></li>
-												                        <li><a href="#">Matemática-Educación Matemática</a></li>
-
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="#" style=" justify-content: center; font-size: 16px; color:hsla(128,39%,55%,1.00); pointer-events: none;
-cursor: default;">Especializaciòn</a></li>
-                                                <li><a href="#">Services &amp; Features</a></li>
-                                                <li><a href="#">Accordions and tabs</a></li>
-                                                <li><a href="#">Menu ideas</a></li>
-                                                <li><a href="#">Students Gallery</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="#" style=" justify-content: center; font-size: 16px; color:hsla(128,39%,55%,1.00); pointer-events: none;
-cursor: default;">Maestrìa</a></li>
-                                                <li><a href="#">Services &amp; Features</a></li>
-                                                <li><a href="#">Accordions and tabs</a></li>
-                                                <li><a href="#">Menu ideas</a></li>
-                                                <li><a href="#">Students Gallery</a></li>
-                                            </ul>
-                                            <div class="single-mega cn-col-4">
-                                                <img src="img/bg-img/portada11.jpg" alt="">
-                                            </div>
-                                        </div>
-                                    </li>
                                     <li><a href="#contenidos" id="admision">Admisión</a></li>
-                                    <li><a href="repositorio.html">Respositorio</a></li>
+                                    <li><a href="#contenidos" id="tesisinicio">Tesis</a></li>
                                     <li><a href="contact.html">Contacto</a></li>
                                 </ul>
                             </div>

@@ -1,4 +1,6 @@
 <script src="../js/jquery/ajax.js"></script>
+
+
 @extends('layouts.plantilla')
 @section('cabecera')
 @endsection
@@ -116,11 +118,17 @@
 														</div>
 												</div>
 										</div>
+										<div class="top-popular-courses-area section-padding-100-70"  id="contenidos">
+												<div class="container" id="contenedora">
+
+												</div>
+										</div>
+
+
 								</div>
 						</div>
 				</div>
 				<!-- ##### Blog Area End ##### -->
-
 
 
 @endsection
@@ -131,3 +139,10 @@
 @endsection
 
 <script src="../js/algo.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$("#tesisinicio").hide();
+});
+
+</script>
