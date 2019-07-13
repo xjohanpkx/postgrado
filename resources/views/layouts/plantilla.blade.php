@@ -18,6 +18,7 @@
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../js/alertifyjs/css/alertify.css">
+    <script src="../js/algo.js"> </script>
 		<link rel="stylesheet" href="../js/alertifyjs/css/themes/default.css">
 
 </head>
@@ -71,30 +72,29 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Inicio</a></li>
-                                    <li><a href="#">Pagina</a>
+                                    <li><a href="/">Inicio</a></li>
+                                    <li><a href="#">Postgrado</a>
                                         <ul class="dropdown">
-                                            <li><a href="admision.html">Admision</a></li>
-                                            <li><a href="course.html">Academia</a></li>
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="contact.html">Contacto</a></li>
-                                            <li><a href="repositorio.html">Repositorio</a></li>
+                                            <li><a href="#contenidos" id="postgrado">Sobre Nosotros</a></li>
+                                            <li><a href="#contenidos" id="maestrias">Maestrías</a></li>
+                                            <li><a href="#contenidos" id="especia">Especializaciones</a></li>
+                                            <li><a href="#contenidos" id="doctorados">Doctorados</a></li>
+                                            <li><a href="#contenidos">Noticias</a></li>
+                                            <li><a href="#contenidos">Contacto</a></li>
+                                            <li><a href="#contenidos">Repositorio</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Academia</a>
+                                    <li><a href="#">Los Más Populares</a>
                                         <div class="megamenu">
                                             <ul class="single-mega cn-col-4">
 												<li><a href="#" style=" justify-content: center; font-size: 16px; color:hsla(128,39%,55%,1.00); pointer-events: none;
-cursor: default;">Diplomado</a></li>
-                                               <li><a href="#">Gestiòn y Planificaciòn Socio-Ambiental</a></li>
-                                                <li><a href="#">Adminitraciòn Tributaria</a></li>
-												<li><a href="#">Formaciòn De La Actitud Orientadora Del Docente</a></li>
-                                                <li><a href="#">Enseñanza Para La Educaiòn</a></li>
-												<li><a href="#">Docencia Para La Educaciòn Universitaria</a></li>
-                                                <li><a href="#">Fìsica, Deporte y Recreaciòn</a></li>
-												<li><a href="#">Agrotoxicologia</a></li>
-												<li><a href="#">Agroeccològia y turismo Ecològico</a></li>
-												<li><a href="#">Desarrollo Comunitario</a></li>
+cursor: default;">Maestrías</a></li>
+                                               <li><a href="#">Informática</a></li>
+                                                <li><a href="#">Gerencia Educativa</a></li>
+                          											<li><a href="#">Ingeniería Mecánica</a></li>
+                                                <li><a href="#">Ingeniería Electrónica</a></li>
+												                        <li><a href="#">Matemática-Educación Matemática</a></li>
+
                                             </ul>
                                             <ul class="single-mega cn-col-4">
                                                 <li><a href="#" style=" justify-content: center; font-size: 16px; color:hsla(128,39%,55%,1.00); pointer-events: none;
@@ -117,7 +117,7 @@ cursor: default;">Maestrìa</a></li>
                                             </div>
                                         </div>
                                     </li>
-                                    <li><a href="admision.html">Admision</a></li>
+                                    <li><a href="#contenidos" id="admision">Admisión</a></li>
                                     <li><a href="repositorio.html">Respositorio</a></li>
                                     <li><a href="contact.html">Contacto</a></li>
                                 </ul>

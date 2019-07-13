@@ -2,6 +2,9 @@
 @section('cabecera')
 @endsection
 @section('contenido')
+<script type="text/javascript">
+
+</script>
     <!-- ##### Hero Area Start ##### -->
     <section class="hero-area">
         <div class="hero-slides owl-carousel">
@@ -181,102 +184,28 @@
                 </div>
             </div>
             <div class="row">
-
-
-
-
-			      <!-- Single Top Popular Course -->
+@foreach($global as $noticiapub)
+		      <!-- Single Top Popular Course -->
                 <div class="col-12 col-lg-6">
-                    <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp" data-wow-delay="400ms">
+                    <div class="single-top-popular-course d-flex align-items-center flex-wrap">
                         <div class="popular-course-content">
-                            <h5>RECTORES DE ARBOL SE</h5>
-                            <span>Por UNESUR   | 19 Marzo, 2019</span>
+                            <h5 style="overflow: hidden;display: -webkit-box; -webkit-line-clamp: 3;-webkit-box-orient: vertical;">{{$noticiapub->titulonoti}}</h5>
+                            <span>Por {{$noticiapub->autor}}   |{{$noticiapub->fechanoti}}</span>
 
-                            <p>Edgar Martínez, presidente de la Asociación, asegura que gracias a las políticas del Estado se</p>
+                            <p style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 6;-webkit-box-orient: vertical;">{{$noticiapub->texto}}</p>
                             <a href="#" class="btn academy-btn btn-sm">Leer Màs</a>
                         </div>
-                        <div class="popular-course-thumb bg-img" style="background-image: url(img/bg-img/noticia.jpg);"></div>
+                        <div class="popular-course-thumb bg-img" style="background-image: url({{$noticiapub->directorio}});"></div>
                     </div>
                 </div>
-
-                <!-- Single Top Popular Course -->
-                <div class="col-12 col-lg-6">
-                    <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp" data-wow-delay="500ms">
-                        <div class="popular-course-content">
-                            <h5>ABIERTA CONVOCATORIA</h5>
-                            <span>Por UNESUR   | 18 Marzo, 2019</span>
-                            <p>En esta ocasión se podrá participar en tres menciones: Investigador Novel, Investigador Amplia</p>
-                            <a href="#" class="btn academy-btn btn-sm">Leer Màs</a>
-                        </div>
-                        <div class="popular-course-thumb bg-img" style="background-image: url(img/bg-img/noticias1.jpg);"></div>
-                    </div>
-                </div>
-
-                <!-- Single Top Popular Course -->
-                <div class="col-12 col-lg-6">
-                    <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp" data-wow-delay="600ms">
-                        <div class="popular-course-content">
-                            <h5>EDGAR MARTÍNEZ MEZA</h5>
-                            <span>Por UNESUR   | 17 Marzo,2019</span>
-                            <p>Nueva junta directiva ARBOL, seguirá trabajando de la mano del Ministro del Poder Popular para</p>
-                            <a href="#" class="btn academy-btn btn-sm">Leer Màs</a>
-                        </div>
-                        <div class="popular-course-thumb bg-img" style="background-image: url(img/bg-img/noticia2.jpg);"></div>
-                    </div>
-                </div>
-
-                <!-- Single Top Popular Course -->
-                <div class="col-12 col-lg-6">
-                    <div class="single-top-popular-course d-flex align-items-center flex-wrap mb-30 wow fadeInUp" data-wow-delay="700ms">
-                        <div class="popular-course-content">
-                            <h5>Nueva Plataforma virtual</h5>
-                            <span>Por UNESUR   |  15 Febrero, 2019</span>
-
-                            <p>Se creara nuena plataforma virtual para la dirección general de creación intelectual.</p>
-                            <a href="#" class="btn academy-btn btn-sm">See More</a>
-                        </div>
-                        <div class="popular-course-thumb bg-img" style="background-image: url(img/bg-img/pc-4.jpg);"></div>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+              @endforeach
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="load-more-btn text-center wow fadeInUp" data-wow-delay="800ms">
-                        <a href="#" class="btn academy-btn">See More</a>
+
+
+                    <a href="#" class="btn academy-btn">See More</a>
                     </div>
                 </div>
             </div>
@@ -285,54 +214,9 @@
     <!-- ##### Testimonials Area End ##### -->
 
     <!-- ##### Top Popular Courses Area Start ##### -->
-    <div class="top-popular-courses-area section-padding-100-70">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-heading text-center mx-auto wow fadeInUp" data-wow-delay="300ms">
-                        <span>Personal</span>
-                        <h3>Información del Personal</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
+    <div class="top-popular-courses-area section-padding-100-70"  id="contenidos">
+        <div class="container" id="contenedora">
 
-				<!-- migracion flipper --->
-
-
-		<div class="col-md-6 col-lg-4">
-          <div class="block-2">
-            <div class="flipper">
-              <div class="front" style="background-image: url(img/clients-img/freddy.jpg);">
-                <div class="box">
-                  <h2>Freddy Villalobos</h2>
-                  <p>Desarrollador Web</p>
-                </div>
-              </div>
-              <div class="back">
-                <!-- back content -->
-
-                <blockquote>
-                  <p>&ldquo;un resumen curricular o información del personal.&rdquo;</p>
-                </blockquote>
-                <div class="author d-flex">
-                  <div class="image mr-3 align-self-center">
-                    <img src="images/person_3.jpg" alt="">
-                  </div>
-                  <div class="name align-self-center">Job Smith <span class="position">Laravel Expert</span></div>
-                </div>
-              </div>
-            </div>
-          </div> <!-- .flip-container -->
-        </div>
-
-
-
-
-
-
-
-            </div>
         </div>
     </div>
     <!-- ##### Top Popular Courses Area End ##### -->

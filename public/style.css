@@ -1643,3 +1643,15 @@ rol:2;
       }
       .notiform .blog-post-thumb input{
         margin: 0; }
+.limitadorp{
+  overflow: hidden;
+  display: -webkit-box;
+    -webkit-line-clamp: 6;
+     -webkit-box-orient: vertical;
+}
+.limitadort{
+  overflow: hidden;
+  display: -webkit-box;
+    -webkit-line-clamp: 3;
+     -webkit-box-orient: vertical;
+}

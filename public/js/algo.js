@@ -1,6 +1,8 @@
 $(document).ready(function(){
 			// for Insert Ajax
 
+
+
 });
 
 //reload tesis
@@ -709,3 +711,113 @@ function buscar_categoria(query = '')
 						});
 					}
 					});
+
+
+//funciones del index o vista publica
+
+	$(document).on('click','#postgrado',function(){
+ruta="/info"
+var fun="mision";
+
+		$.ajax({
+		url:ruta,
+		data:{fun:fun},
+		type:'GET',
+		dataType:'json',
+		success:function(data){
+				$("#contenedora").html(data);
+				console.log(data);
+		}
+
+		});
+
+	});
+	$(document).on('click','#maestrias',function(){
+ruta="/info"
+var fun="maestrias";
+
+		$.ajax({
+		url:ruta,
+		data:{fun:fun},
+		type:'GET',
+		dataType:'json',
+		success:function(data){
+				$("#contenedora").html(data);
+				console.log(data);
+		}
+
+		});
+
+	});
+
+	$(document).on('click','#especia',function(){
+ruta="/info"
+var fun="especia";
+
+		$.ajax({
+		url:ruta,
+		data:{fun:fun},
+		type:'GET',
+		dataType:'json',
+		success:function(data){
+				$("#contenedora").html(data);
+				console.log(data);
+		}
+
+		});
+
+	});
+
+	$(document).on('click','#admision',function(){
+ruta="/info"
+var fun="admision";
+
+		$.ajax({
+		url:ruta,
+		data:{fun:fun},
+		type:'GET',
+		dataType:'json',
+		success:function(data){
+				$("#contenedora").html(data);
+				console.log(data);
+		}
+
+		});
+
+	});
+
+	$(document).on('click','#preinscripcion',function(){
+ruta="/info"
+var fun="preisncri";
+
+		$.ajax({
+		url:ruta,
+		data:{fun:fun},
+		type:'GET',
+		dataType:'json',
+		success:function(data){
+				$("#contenedora").html(data);
+				console.log(data);
+		}
+
+		});
+
+	});
+
+	$(document).on('click','#admitidos',function(){
+ruta="/info"
+var fun="admitidos";
+
+		$.ajax({
+		url:ruta,
+		data:{fun:fun},
+		type:'GET',
+		dataType:'json',
+		success:function(data){
+				$("#contenedora").html(data);
+				console.log(data);
+		}
+
+		});
+
+	});

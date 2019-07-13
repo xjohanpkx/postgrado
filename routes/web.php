@@ -28,11 +28,12 @@ Route::post("/actu","TesiController@actualizar");
 Route::get("indexb","TesiController@indexb");
 Route::get("indexbnoti","NoticiaController@indexb");
 Route::get("/mirar/descargar/{id}","TesiController@descargardoc");
+Route::get("/pdf/descargar/{id}","InicioController@descargardoc");
 Route::get("buscar/tesis/categoria","TesiController@categoriabus");
 Route::put("file/{tesi}","TesiController@updatefile");
 Route::put("filenoti/{noticia}","NoticiaController@updatefile");
 Route::get('/',"InicioController@index");
-
+Route::get('/info',"InicioController@info");
 
 Auth::routes();
 
