@@ -25,14 +25,73 @@ class InicioController extends Controller
     public function index(Request $request)
     {
 
-       $global=Noticia::orderBy('fechanoti', 'asc')->paginate(4);
+       $global=Noticia::orderBy('fechanoti', 'asc')->paginate(2);
 
       if($request->Ajax()){
 
-      return response()->json(view ("Noticia/modal.mirarnoti",compact('global'))->render());
+      return response()->json(view ("inicio/modal.seminoticia",compact('global'))->render());
 
       }
-      return view ("index",compact('global'));
+      return view ("index");
+    }
+    public function load_data(Request $request)
+    {
+            if($request->Ajax()){
+            if($request->id > 0){
+
+              $global=DB::table('noticias')->where('id','<',$request->id)->orderBy('id','DESC')->limit(2)->get();
+
+
+            }else{
+
+              $global=DB::table('noticias')->orderBy('id','DESC')->limit(2)->get();
+            }
+            $output="";
+            $last_id="";
+            if(!$global->isEmpty()){
+
+              foreach($global as $noticia){
+                $output.='
+                        <!-- Single Top Popular Course -->
+                              <div class="col-12 col-lg-6">
+                                  <div class="single-top-popular-course d-flex align-items-center flex-wrap">
+                                      <div class="popular-course-content">
+                                          <h5 style="overflow: hidden;display: -webkit-box; -webkit-line-clamp: 3;-webkit-box-orient: vertical;">'.$noticia->titulonoti.'</h5>
+                                          <span>Por '.$noticia->autor.' |'.$noticia->fechanoti.'</span>
+
+                                          <p style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 6;-webkit-box-orient: vertical;">'.$noticia->texto.'</p>
+                                          <a href="#" class="btn academy-btn btn-sm">Leer Màs</a>
+                                      </div>
+                                      <div class="popular-course-thumb bg-img" style="background-image: url('.$noticia->directorio.');"></div>
+                                  </div>
+                              </div>
+                          ';}
+
+$last_id=$noticia->id;
+$output.='
+
+    <div id="load_more" class="col-12">
+        <div class="load-more-btn text-center">
+
+              <button type="button" id="load_more_boton" data-id="'.$last_id.'"  class="btn academy-btn">Mira más</button>
+        </div>
+        </div>
+  ';
+            }else{
+              $output.='
+
+              <div id="load_more" class="col-12">
+                  <div class="load-more-btn text-center">
+
+              <button type="button" name"load_more_boton" id"load_more_boton" class="btn academy-btn">no hay más noticias</button>
+              </div>
+              </div>
+          ';
+
+            }
+
+      }
+echo $output;
     }
 
     public function indexb(Request $request)
@@ -84,7 +143,26 @@ if($funcion=="mision"){
 
 $global=admitido::all();
   return response()->json(view ("inicio/modal.admitidos",compact("global"))->render());
-}else  if($funcion=="tesis"){
+}else  if($funcion=="noticias"){
+$global=Noticia::orderBy('fechanoti', 'desc')->paginate(2);
+
+if($request->Ajax()){
+
+return response()->json(view ("inicio/modal.mirarnoticiainicio",compact('global'))->render());
+
+}
+return response()->json(view ("inicio/modal.mirarnoticiainicio",compact('global'))->render());
+}else  if($funcion=="noticiasload"){
+       $global=Noticia::orderBy('fechanoti', 'desc')->paginate(2);
+
+       if($request->Ajax()){
+
+       return response()->json(view ("inicio/modal.mirarpaginanoti",compact('global'))->render());
+
+       }
+        return response()->json(view ("inicio/modal.mirarpaginanoti",compact('global'))->render());
+
+     }else  if($funcion=="tesis"){
        $global=Tesi::orderBy('fecha', 'asc')->paginate(2);
 
        if($request->Ajax()){
@@ -335,7 +413,86 @@ public function descargartesi($id)
           }
     }
 
+    public function indexc(Request $request)
+    {
+      $query=$request->get('query');
 
+          $global=DB::table('noticias')->where('titulonoti','like','%'.$query.'%')->paginate(2);
+
+      return response()->json(view ("inicio/modal.mirarpaginanoti",compact('global'))->render());
+
+    }
+
+    public function buscarnoticia(Request $request)
+      {
+        if($request->ajax()){
+          $output="";
+            $query=$request->get('query');
+
+            if($query!=''){
+              $data=DB::table('noticias')
+              ->where('titulonoti','like','%'.$query.'%')->paginate(2);
+
+            }else{
+
+            }
+
+            $total_result=$data->count();
+            if($total_result>0){
+
+
+              $output .='
+              <div class="academy-blog-posts">
+                <div class="row">';
+                foreach($data as $noticia){
+                $output.='
+
+                <!-- Single Blog Start -->
+               <div class="col-12">
+                   <div class="single-blog-post mb-50 wow fadeInUp" data-wow-delay="300ms">
+                       <!-- Post Thumb -->
+                       <div class="blog-post-thumb mb-50">
+  <input type="hidden" name="_token" value="'.csrf_token().'" id="token2">
+                           <img src="'.$noticia->directorio.'" style="max-height:300px; width:100%;" alt="">
+                                </div>
+                       <!-- Post Title -->
+                       <a href="#" class="post-title">'.$noticia->titulonoti.'</a>
+                       <!-- Post Meta -->
+                       <div class="post-meta">
+
+                           <p>Por <a href="#">'.$noticia->autor.'</a> | <a href="#">'.$noticia->fechanoti.'</a> |</p>
+                       </div>
+                       <!-- Post Excerpt -->
+                       <p style="font-size:14px;">'.$noticia->texto.'</p>
+                       </div>
+
+
+               </div>
+
+
+    ';}
+            $output .='
+              </div>
+              </div>
+
+
+
+              <!-- Pagination Area Start -->
+                  <nav>
+              '.$data->render().'
+                  </nav>
+              ';
+
+            }else{
+            $output='none';
+
+            }
+            $data=array('table_data'=>$output);
+
+          echo json_encode($data);
+
+
+    }}
 
 
 

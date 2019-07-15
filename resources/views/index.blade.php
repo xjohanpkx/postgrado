@@ -2,9 +2,7 @@
 @section('cabecera')
 @endsection
 @section('contenido')
-<script type="text/javascript">
 
-</script>
     <!-- ##### Hero Area Start ##### -->
     <section class="hero-area">
         <div class="hero-slides owl-carousel">
@@ -175,41 +173,26 @@
     <!-- ##### Testimonials Area Start ##### -->
     <div class="testimonials-area section-padding-100 bg-img bg-overlay" style="background-image: url(img/bg-img/bg-2.jpg);">
         <div class="container">
+          <div class="infinite-scroll" id="con">
+
             <div class="row">
                 <div class="col-12">
-                    <div class="section-heading text-center mx-auto white wow fadeInUp" data-wow-delay="300ms">
+                    <div class="section-heading text-center mx-auto white">
                         <span>Lo Nuevo</span>
                         <h3>Últimas Noticias</h3>
                     </div>
                 </div>
             </div>
-            <div class="row">
-@foreach($global as $noticiapub)
-		      <!-- Single Top Popular Course -->
-                <div class="col-12 col-lg-6">
-                    <div class="single-top-popular-course d-flex align-items-center flex-wrap">
-                        <div class="popular-course-content">
-                            <h5 style="overflow: hidden;display: -webkit-box; -webkit-line-clamp: 3;-webkit-box-orient: vertical;">{{$noticiapub->titulonoti}}</h5>
-                            <span>Por {{$noticiapub->autor}}   |{{$noticiapub->fechanoti}}</span>
 
-                            <p style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 6;-webkit-box-orient: vertical;">{{$noticiapub->texto}}</p>
-                            <a href="#" class="btn academy-btn btn-sm">Leer Màs</a>
-                        </div>
-                        <div class="popular-course-thumb bg-img" style="background-image: url({{$noticiapub->directorio}});"></div>
-                    </div>
-                </div>
-              @endforeach
+          <div id="post_data" class="row">
+
+
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="load-more-btn text-center wow fadeInUp" data-wow-delay="800ms">
 
-
-                    <a href="#" class="btn academy-btn">See More</a>
-                    </div>
-                </div>
-            </div>
         </div>
+
+
+            </div>
     </div>
     <!-- ##### Testimonials Area End ##### -->
 
@@ -217,6 +200,7 @@
     <div class="top-popular-courses-area section-padding-100-70"  id="contenidos">
       @include('Tesi/modal.show')
         <input type="hidden" id="guardagrado">
+        <input type="hidden" id="guardanoti">
         <div class="container" id="contenedora">
 
         </div>

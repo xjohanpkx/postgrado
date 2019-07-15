@@ -1,8 +1,32 @@
 $(document).ready(function(){
 			// for Insert Ajax
 
+//scroll infinito de noticias resumidas
+			var _token=$('input[name="_token"]').val();
+			load_data('',_token);
+			function load_data(id="",_token){
+				ruta="http://127.0.0.1:8000/loadata";
+
+				$.ajax({
+					url:ruta,
+					method:"post",
+					data:{id:id,_token:_token},
+					success:function(data){
+
+						$("#load_more_boton").remove();
+						$("#post_data").append(data);
+					}
 
 
+				})
+			}
+			//scroll infinito de noticias resumidas
+$(document).on('click',"#load_more_boton",function(){
+var id=$(this).data("id");
+$('load_more_boton').html('<b>loading...</b>');
+
+	load_data(id, _token);
+});
 });
 
 //reload tesis
@@ -236,6 +260,36 @@ alertify.success(data.success);
 });
 });
 
+
+var page = 1;
+	$(window).scroll(function() {
+	    if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+	        page++;
+	        loadMoreData(page);
+	    }
+	});
+
+function loadMoreData(){
+
+
+var ruta70="http://127.0.0.1:8000";
+
+		$.ajax({
+		url:ruta70,
+		data:{page:page},
+		type:'GET',
+		dataType:'json',
+		success:function(data){
+
+	$("#con").append(data);
+
+		}
+
+		});
+
+
+}
+
 $(document).on('click','.pagination a',function(e){
 
 e.preventDefault();
@@ -308,12 +362,29 @@ $('#contenidoa').html(data);
 
 		});
 
-	}else if(mira=="http://127.0.0.1:8000/info?"){
-			var valor=$("#Searchtesisinicio").val();
-
+	}else if(mira=="http://127.0.0.1:8000/?"){
+id=0;
+id=id++;
+var ruta70="http://127.0.0.1:8000/";
+var siguiente=$("#con").attr("id","con"+id+"");
 			$.ajax({
 			url:ruta59,
 			data:{page:page},
+			type:'GET',
+			dataType:'json',
+			success:function(data){
+				alert(siguiente);
+		siguiente.html(data);
+			}
+
+			});
+
+		}else if(mira=="http://127.0.0.1:8000/info?"){
+			var valor=$("#Searchtesisinicio").val();
+		var fun=$("#guardanoti").val();
+			$.ajax({
+			url:ruta59,
+			data:{page:page,fun:fun},
 			type:'GET',
 			dataType:'json',
 			success:function(data){
@@ -322,7 +393,22 @@ $('#contenidoa').html(data);
 
 			});
 
-		}else if(mira=="http://127.0.0.1:8000/buscar/tesis/inicio?"|mira=="http://127.0.0.1:8000/indexbinicio?"){
+		}else if(mira=="http://127.0.0.1:8000/buscar/noticia/inicio?"|mira=="http://127.0.0.1:8000/indexc?"){
+				var valor=$("#Searchnotiinicio").val();
+			var ruta61="http://127.0.0.1:8000/indexc?query="+valor+"";
+
+				$.ajax({
+				url:ruta61,
+				data:{page:page},
+				type:'GET',
+				dataType:'json',
+				success:function(data){
+			$('#contenidoinicio').html(data);
+				}
+
+				});
+
+			}else if(mira=="http://127.0.0.1:8000/buscar/tesis/inicio?"|mira=="http://127.0.0.1:8000/indexbinicio?"){
 				var valor=$("#Searchtesisinicio").val();
 			var ruta60="http://127.0.0.1:8000/indexbinicio?query="+valor+"";
 
@@ -967,3 +1053,56 @@ $("#tesisinicio").click();
 	 });
 
 	 }
+
+	 $(document).on('click','#noticiasinicio',function(){
+ ruta="/info"
+ var fun="noticias";
+ 		$.ajax({
+ 		url:ruta,
+ 		data:{fun:fun},
+ 		type:'GET',
+ 		dataType:'json',
+ 		success:function(data){
+	 				$("#contenedora").html(data);
+$("#guardanoti").val("noticiasload");
+ 		}
+
+ 		});
+
+ 	});
+
+
+
+
+	//buscar por campo titulo
+
+	function buscar_continuosnotiinicio(query = '')
+	 {
+		 var url="/buscar/noticia/inicio";
+	  $.ajax({
+	   url:url,
+	   method:'GET',
+	   data:{query:query},
+	   dataType:'json',
+	   success:function(data)
+	   {
+			 		 if(data.table_data=="none"){
+				 alertify.error("No se encontro la busqueda");
+			 }else{
+	    $('#contenidoinicio').html(data.table_data);
+		}}
+	  })
+	 }
+
+		//buscar por campo titulo
+		 $(document).on('click', '#buscarnotiinicio', function(e){
+			 e.preventDefault();
+		  var query = $("#Searchnotiinicio").val();
+
+		if(query==""){
+	$("#noticiasinicio").click();
+
+		}else{
+		  buscar_continuosnotiinicio(query);
+
+		} });

@@ -79,14 +79,19 @@
                                             <li><a href="#contenidos" id="maestrias">Maestrías</a></li>
                                             <li><a href="#contenidos" id="especia">Especializaciones</a></li>
                                             <li><a href="#contenidos" id="doctorados">Doctorados</a></li>
-                                            <li><a href="#contenidos">Noticias</a></li>
-                                            <li><a href="#contenidos">Contacto</a></li>
-                                            <li><a href="#contenidos">Repositorio</a></li>
+                                            <li><a href="#contenidos" id="noticiasinicio">Noticias</a></li>
+
                                         </ul>
                                     </li>
+                                    <li><a href="#contenidos" id="postgrado">Sobre Nosotros</a></li>
                                     <li><a href="#contenidos" id="admision">Admisión</a></li>
                                     <li><a href="#contenidos" id="tesisinicio">Tesis</a></li>
-                                    <li><a href="contact.html">Contacto</a></li>
+                                    <li><a href="#contenidos" id="noticiasinicio">Noticias</a></li>
+                                  @if (Route::has('login'))
+                                    @auth
+                                    <li>  <a href="{{ url('/tesis') }}"><i class="fa fa-wrench"></i>Administrar</a></li>
+                                    @endauth
+                                    @endif
                                 </ul>
                             </div>
                             <!-- Nav End -->
@@ -98,7 +103,12 @@
                                   @if (Route::has('login'))
                                       <div class="top-right links">
                                           @auth
-                                              <a href="{{ url('/tesis') }}"><i class="fa fa-wrench"></i>Administrar</a>
+                                              <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>salir</a>
+                                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                                @csrf
+                                                            </form>
+
                                           @else
                                               <a href="#freddymodal" data-toggle="modal"><i class="fa fa-sign-in"></i> <span>Iniciar Sección</span></a>
 
@@ -131,9 +141,8 @@
     	<input id="email" type="email" placeholder="E-mail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
         @error('email')
             <span class="invalid-feedback" role="alert">
-            <script type="text/javascript">alert("
-  Estas credenciales no coinciden con nuestros registros.") </script>
                 <strong>{{ $message }}</strong>
+                <script type="text/javascript">alert("Estas credenciales no coinciden con nuestros registros.");</script>
             </span>
         @enderror
     		<input id="password" type="password" placeholder="Contraseña" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -141,7 +150,7 @@
              <span class="invalid-feedback" role="alert">
                  <strong>{{ $message }}</strong>
                  <script type="text/javascript">alert("
-       Estas credenciales no coinciden con nuestros registros.") </script>
+       Estas credenciales no coinciden con nuestros registros."); </script>
              </span>
          @enderror
 
@@ -302,6 +311,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos
     <script src="../js/active.js"></script>
 
     <script src="../js/alertifyjs/alertify.js"></script>
+    <script src="//unpkg.com/jscroll/dist/jquery.jscroll.min.js"></script>
     </div>
 </body>
 
