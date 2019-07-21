@@ -94,14 +94,14 @@
 
 														<!-- Blog Post Catagories -->
 														<div class="blog-post-categories mb-30">
-																<h5>Categorias</h5>
+																<h5>Grado</h5>
 																<ul>
 																		<li><a href="#" name="maestria" id="maestriabus" onclick="categoriabus(this)">Maestría</a></li>
 																		<li><a href="#" name="doctorado" id="doctoradobus" onclick="categoriabus(this)">Doctorado</a></li>
 																		</ul>
 														</div>
 														<div class="blog-post-categories mb-30">
-																<h5>Categorias</h5>
+																<h5>Formato</h5>
 																<ul>
 																		<li><a href="#" name="tesisr" id="tesisreload" onclick="reload(this)">Tesis</a></li>
 																		<li><a href="#" name="noticiasr" id="noticiasreload" onclick="reload(this)">Noticias</a></li>

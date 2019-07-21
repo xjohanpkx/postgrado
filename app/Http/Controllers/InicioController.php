@@ -60,7 +60,7 @@ class InicioController extends Controller
                                           <span>Por '.$noticia->autor.' |'.$noticia->fechanoti.'</span>
 
                                           <p style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 6;-webkit-box-orient: vertical;">'.$noticia->texto.'</p>
-                                          <a href="#" class="btn academy-btn btn-sm">Leer Màs</a>
+                                          <a href="#" id="morenoticia" data-id="'.$noticia->id.'" class="btn academy-btn btn-sm">Leer Màs</a>
                                       </div>
                                       <div class="popular-course-thumb bg-img" style="background-image: url('.$noticia->directorio.');"></div>
                                   </div>
@@ -423,17 +423,17 @@ public function descargartesi($id)
 
     }
 
+
+
     public function buscarnoticia(Request $request)
       {
         if($request->ajax()){
           $output="";
             $query=$request->get('query');
-
+            $id=$request->get('id');
             if($query!=''){
               $data=DB::table('noticias')
               ->where('titulonoti','like','%'.$query.'%')->paginate(2);
-
-            }else{
 
             }
 
@@ -495,6 +495,13 @@ public function descargartesi($id)
     }}
 
 
+
+        public function buscarnoticiaid(Request $request, $id)
+          {
+            if($request->ajax()){
+            $global=Noticia::find($id);
+              return response()->json(view ("inicio/modal.mirarnoticiainicio",compact('global'))->render());
+        }}
 
 
 

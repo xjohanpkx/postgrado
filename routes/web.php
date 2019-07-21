@@ -25,6 +25,7 @@ Route::get("/mirar/buscar","TesiController@mirabuscador");
 Route::get("/buscar/tesis","TesiController@buscar");
 Route::get("/buscar/noticia","NoticiaController@buscar");
 Route::get("/buscar/noticia/inicio","InicioController@buscarnoticia");
+Route::get("/buscar/noticia/{id}","InicioController@buscarnoticiaid");
 Route::get("/buscar/tesis/inicio","InicioController@buscar");
 Route::post("/actu","TesiController@actualizar");
 Route::get("indexb","TesiController@indexb");

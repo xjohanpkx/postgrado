@@ -19,7 +19,7 @@
                       <p>por <a href="#" id="autoresview"></a> | <a href="#" id="fechaview"></a> | <a href="#" id="gradoview"></a></p>
                   </div>
                   <!-- Post Excerpt -->
-                  <p id="resumenview"></p>
+                  <p id="resumenview" style="font-size:14px;text-align:justify;"></p>
                   <!-- Read More btn -->
 
               </div>

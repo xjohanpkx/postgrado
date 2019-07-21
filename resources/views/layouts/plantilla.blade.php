@@ -311,7 +311,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos
     <script src="../js/active.js"></script>
 
     <script src="../js/alertifyjs/alertify.js"></script>
-    <script src="//unpkg.com/jscroll/dist/jquery.jscroll.min.js"></script>
     </div>
 </body>
 

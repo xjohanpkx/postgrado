@@ -73,7 +73,7 @@
 																										<option class="form-control" value="{{$tesis->grado}}">{{$tesis->grado}}</option>
 																									<option class="form-control" value="maestria">Maestrìa</option>
 																									<option class="form-control" value="doctorado">Doctorado</option>
-																									<option class="form-control"  value="diplomado">Diplomado</option>
+																	
 																								</select>
 																								<input type="file" name="documento" id="documento" class="form-control" placeholder="Documento">
 	 </form>

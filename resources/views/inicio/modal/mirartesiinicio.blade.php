@@ -67,7 +67,7 @@
 
 														<!-- Blog Post Catagories -->
 														<div class="blog-post-categories mb-30">
-																<h5>Categorias</h5>
+																<h5>Grado</h5>
 																<ul>
 																		<li><a href="#contenidos" name="maestria" id="maestriabusinicio" onclick="categoriabusinicio(this)">Maestría</a></li>
 																		<li><a href="#contenidos" name="doctorado" id="doctoradobusinicio" onclick="categoriabusinicio(this)">Doctorado</a></li>
