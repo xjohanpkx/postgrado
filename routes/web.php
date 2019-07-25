@@ -43,6 +43,7 @@ Route::get('/',"InicioController@index");
 Route::get('/info',"InicioController@info");
 Route::get("/noticia/incio","InicioController@noticiainicio");
 Route::post("/loadata","InicioController@load_data");
+Route::get("/loadnoti","InicioController@noti");
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

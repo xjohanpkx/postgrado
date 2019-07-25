@@ -499,12 +499,17 @@ public function descargartesi($id)
         public function buscarnoticiaid(Request $request, $id)
           {
             if($request->ajax()){
-            $global=Noticia::find($id);
-              return response()->json(view ("inicio/modal.mirarnoticiainicio",compact('global'))->render());
+              $global=DB::table('noticias')
+              ->where('id','like',$id)->get();
+        return response()->json($global->toArray());
         }}
 
 
+        public function noti()
+          {
 
+        return view("inicio/modal.mirarnoticiainicio0");
+        }
 
 
 

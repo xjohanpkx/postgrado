@@ -272,7 +272,7 @@ var page=$(this).attr('href').split('page=')[1];
 var ruta="http://127.0.0.1:8000/tesis";
 var ruta2="http://127.0.0.1:8000/indexb";
 var ruta59="http://127.0.0.1:8000/info";
-alert(mira);
+
 if(mira=="http://127.0.0.1:8000/buscar/tesis?"|mira=="http://127.0.0.1:8000/indexb?"){
 	var valor=$("#Searchtesis").val();
 var ruta3="http://127.0.0.1:8000/indexb?query="+valor+"";
@@ -347,7 +347,7 @@ var siguiente=$("#con").attr("id","con"+id+"");
 			type:'GET',
 			dataType:'json',
 			success:function(data){
-				alert(siguiente);
+
 		siguiente.html(data);
 			}
 
@@ -401,7 +401,7 @@ var siguiente=$("#con").attr("id","con"+id+"");
 			var valor=$("#Searchtesisinicio").val();
 
 			var ruta44="http://127.0.0.1:8000/indexbinicio?query="+valor+"";
-				alert(ruta44);
+
 			$.ajax({
 			url:ruta44,
 			data:{page:page},
@@ -1082,20 +1082,13 @@ $("#guardanoti").val("noticiasload");
 
 		} });
 
-//leer mas noticias
+//leer mas las noticias
 $(document).on('click', '#morenoticia', function(e){
 	e.preventDefault();
-	var id=$("#morenoticia").data("id");
+	var id=$(this).data("id");
 	var url="/buscar/noticia/"+id+"";
-	$.ajax({
-	 url:url,
-	 method:'GET',
-	 data:{id:id},
-	 dataType:'json',
-	 success:function(data)
-	 {
-
-		$('#contenidoinicio').load(data);
-	}
-	})
+	$.get(url,function(res){
+	$('#contenedora').load('/loadnoti');
+	$("#titulnoti").append(res.titulonoti);
+  });
  });
