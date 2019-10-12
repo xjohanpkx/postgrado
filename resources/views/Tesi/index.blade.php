@@ -86,6 +86,7 @@
 																<form >
 
 																		<input type="search" name="search" id="Searchtesis" placeholder="buscar">
+																		<input type="hidden" name="contecat" id="contecat" value="">
 																			<button type="submit" id="buscartesis" form="buscartes"><i class="fa fa-search" aria-hidden="true"></i></button>
 																</form>
 
@@ -98,6 +99,7 @@
 																<ul>
 																		<li><a href="#" name="maestria" id="maestriabus" onclick="categoriabus(this)">Maestría</a></li>
 																		<li><a href="#" name="doctorado" id="doctoradobus" onclick="categoriabus(this)">Doctorado</a></li>
+																			<li><a href="#" name="todo" id="todo" onclick="categoriabus(this)">Todos</a></li>
 																		</ul>
 														</div>
 														<div class="blog-post-categories mb-30">
@@ -142,7 +144,10 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
+	$("#noticiasinicio").css("color","red");
 	$("#tesisinicio").hide();
+
+
 });
 
 </script>

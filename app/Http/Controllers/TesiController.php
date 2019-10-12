@@ -34,19 +34,31 @@ return view ("Tesi.index",compact('global'));
     public function indexb(Request $request)
     {
   $query=$request->get('query');
-  if($query=="maestria"|$query=="doctorado"){
+    $querycat=$request->cate;
 
-    $global=DB::table('tesis')->where('grado','like','%'.$query.'%')->paginate(2);
+    if($querycat==""){
+      $global=DB::table('tesis')->where('titulo','like','%'.$query.'%')->paginate(2);
+
+
+    return response()->json(view ("Tesi/modal.mirar",compact('global'))->render());
+
+  }else if($querycat=="maestria"|$querycat=="doctorado" && $query==""){
+
+    $global=DB::table('tesis')->where('grado','like','%'.$querycat.'%')->paginate(2);
 
 
   return response()->json(view ("Tesi/modal.mirar",compact('global'))->render());
 
 
-}else{
-      $global=DB::table('tesis')->where('titulo','like','%'.$query.'%')->paginate(2);
-
+}else if($querycat=="maestria"|$querycat=="doctorado" && $query!="") {
+  $global=DB::table('tesis')->where('titulo','like','%'.$query.'%')->where('grado','like','%'.$querycat.'%')->paginate(2);
 
 return response()->json(view ("Tesi/modal.mirar",compact('global'))->render());
+}else{
+  $global=DB::table('tesis')->where('titulo','like','%'.$query.'%')->paginate(2);
+
+  return response()->json(view ("Tesi/modal.mirar",compact('global'))->render());
+
 }
 
 
@@ -81,8 +93,14 @@ return response()->json(view ("Tesi/modal.mirar",compact('global'))->render());
       if($request->ajax()){
   $query=$request->get('query');
   $output="";
+  if($query=="todo"){
+
+   $data=Tesi::orderBy('fecha', 'asc')->paginate(2);
+
+  }else{
   $data=DB::table('tesis')->where('grado','like',$query)->paginate(2);
-  $total_result=$data->count();
+}
+$total_result=$data->count();
   if($total_result>0){
 
                   $output .='
@@ -157,14 +175,20 @@ echo json_encode($data);
         if($request->ajax()){
           $output="";
             $query=$request->get('query');
+            $querycat=$request->cate;
+            if($query!='' && $querycat=="maestria"||$querycat=="doctorado"){
 
-            if($query!=''){
-              $data=DB::table('tesis')
-              ->where('titulo','like','%'.$query.'%')->paginate(2);
+              $data=DB::table('tesis')->where('titulo','like','%'.$query.'%')->where('grado','like','%'.$querycat.'%')->paginate(2);
 
+            }else if($query!="" && $querycat=="nulo"){
+
+              $data=DB::table('tesis')->where('titulo','like','%'.$query.'%')->paginate(2);
             }else{
 
+              $data=DB::table('tesis')->where('titulo','like','%'.$query.'%')->paginate(2);
+
             }
+
 
             $total_result=$data->count();
             if($total_result>0){

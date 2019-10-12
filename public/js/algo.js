@@ -275,11 +275,12 @@ var ruta59="http://127.0.0.1:8000/info";
 
 if(mira=="http://127.0.0.1:8000/buscar/tesis?"|mira=="http://127.0.0.1:8000/indexb?"){
 	var valor=$("#Searchtesis").val();
+	var cate=$("#contecat").val()
 var ruta3="http://127.0.0.1:8000/indexb?query="+valor+"";
 
 	$.ajax({
 	url:ruta3,
-	data:{page:page},
+	data:{page:page,cate:cate},
 	type:'GET',
 	dataType:'json',
 	success:function(data){
@@ -290,12 +291,12 @@ var ruta3="http://127.0.0.1:8000/indexb?query="+valor+"";
 	});
 
 }else if(mira=="http://127.0.0.1:8000/buscar/tesis/categoria?"){
-var valor=$("#gradoview").text();
-
+var valor=$("#Searchtesis").val();
+var cate=$("#contecat").val()
 var ruta4="http://127.0.0.1:8000/indexb?query="+valor+"";
 $.ajax({
 url:ruta4,
-data:{page:page},
+data:{page:page,cate:cate},
 type:'GET',
 dataType:'json',
 success:function(data){
@@ -384,11 +385,12 @@ var siguiente=$("#con").attr("id","con"+id+"");
 
 			}else if(mira=="http://127.0.0.1:8000/buscar/tesis/inicio?"|mira=="http://127.0.0.1:8000/indexbinicio?"){
 				var valor=$("#Searchtesisinicio").val();
+				var cate=$("#catecontenedor").val()
 			var ruta60="http://127.0.0.1:8000/indexbinicio?query="+valor+"";
 
 				$.ajax({
 				url:ruta60,
-				data:{page:page},
+				data:{page:page,cate:cate},
 				type:'GET',
 				dataType:'json',
 				success:function(data){
@@ -399,12 +401,12 @@ var siguiente=$("#con").attr("id","con"+id+"");
 
 			}else if(mira=="http://127.0.0.1:8000/buscar/tesis/inicio/categoria?"){
 			var valor=$("#Searchtesisinicio").val();
-
+			var cate=$("#catecontenedor").val()
 			var ruta44="http://127.0.0.1:8000/indexbinicio?query="+valor+"";
 
 			$.ajax({
 			url:ruta44,
-			data:{page:page},
+			data:{page:page,cate:cate},
 			type:'GET',
 			dataType:'json',
 			success:function(data){
@@ -432,12 +434,12 @@ var siguiente=$("#con").attr("id","con"+id+"");
 
 //buscar por campo titulo
 function buscar_continuos(query = '')
- {
+ { var cate=$("#contecat").val();
 	 var url="/buscar/tesis";
   $.ajax({
    url:url,
    method:'GET',
-   data:{query:query},
+   data:{query:query,cate:cate},
    dataType:'json',
    success:function(data)
    {
@@ -463,11 +465,37 @@ carga();
 //buscar por link de categoria
 function categoriabus (val){
 var query=val.name;
+$("#contecat").val(query);
+
+if(query=="maestria"){
+$("#maestriabus").css("color","green");
+$("#doctoradobus").css("color","black");
+$("#Searchtesis").val("");
+
 buscar_categoria(query);
+
+}else if(query=="doctorado"){
+$("#doctoradobus").css("color","green");
+$("#maestriabus").css("color","black");
+
+$("#Searchtesis").val("");
+
+buscar_categoria(query);
+
+}else if(query=="todo"){
+$("#doctoradobus").css("color","black");
+$("#maestriabus").css("color","black");
+$("#Searchtesis").val("");
+$("#tesisreload").click();
+
+}
+
+
 
 }
 function buscar_categoria(query = '')
  {
+
 	 var url="/buscar/tesis/categoria";
   $.ajax({
    url:url,
@@ -942,6 +970,7 @@ var fun="tesis";
 		dataType:'json',
 		success:function(data){
 				$("#contenedora").html(data);
+				$("#guardanoti").val("tesisload");
 
 		}
 
@@ -953,12 +982,16 @@ var fun="tesis";
 //buscar por campo titulo
 
 function buscar_continuosinicio(query = '')
- {
+ {	var cate=$("#catecontenedor").val();
+ if(cate==""){
+
+	 cate="nulo";
+ }
 	 var url="/buscar/tesis/inicio";
   $.ajax({
    url:url,
    method:'GET',
-   data:{query:query},
+   data:{query:query,cate:cate},
    dataType:'json',
    success:function(data)
    {
@@ -986,10 +1019,27 @@ $("#tesisinicio").click();
 	//buscar por link de categoria
 	function categoriabusinicio (val){
 	var query=val.name;
-	$("#Searchtesisinicio").val(query);
+	$("#catecontenedor").val(query);
+	if(query=="maestria"){
+$("#maestriabusinicio").css("color","green");
+$("#doctoradobusinicio").css("color","black");
+$("#Searchtesisinicio").val("");
 	buscar_categoriainicio(query);
 
-	}
+}else if(query=="doctorado"){
+	$("#doctoradobusinicio").css("color","green");
+$("#maestriabusinicio").css("color","black");
+
+$("#Searchtesisinicio").val("");
+	buscar_categoriainicio(query);
+
+}else if(query=="todos"){
+$("#doctoradobusinicio").css("color","black");
+$("#maestriabusinicio").css("color","black");
+$("#Searchtesisinicio").val("");
+$("#tesisinicio").click();
+}
+}
 	function buscar_categoriainicio(query = '')
 	 {
 		 var url="/buscar/tesis/inicio/categoria";

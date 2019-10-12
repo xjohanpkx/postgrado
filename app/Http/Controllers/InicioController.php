@@ -97,20 +97,38 @@ echo $output;
     public function indexb(Request $request)
     {
   $query=$request->get('query');
-  if($query=="maestria"|$query=="doctorado"){
+  $querycat=$request->cate;
 
-    $global=DB::table('tesis')->where('grado','like','%'.$query.'%')->paginate(2);
+if($querycat==""){
+
+  $global=DB::table('tesis')->where('titulo','like','%'.$query.'%')->paginate(2);
+
+
+return response()->json(view ("inicio/modal.mirarpagina",compact('global'))->render());
+
+
+}else if($querycat=="maestria"|$querycat=="doctorado" && $query==""){
+
+    $global=DB::table('tesis')->where('grado','like','%'.$querycat.'%')->paginate(2);
 
 
   return response()->json(view ("inicio/modal.mirarpagina",compact('global'))->render());
 
 
-  }else{
-      $global=DB::table('tesis')->where('titulo','like','%'.$query.'%')->paginate(2);
+}else if($querycat=="maestria"|$querycat=="doctorado" && $query!=""){
+
+      $global=DB::table('tesis')->where('titulo','like','%'.$query.'%')->where('grado','like','%'.$querycat.'%')->paginate(2);
 
 
   return response()->json(view ("inicio/modal.mirarpagina",compact('global'))->render());
-  }
+}else{
+
+  //$global=DB::table('tesis')->where('titulo','like','%'.$query.'%')->paginate(2);
+
+
+//return response()->json(view ("inicio/modal.mirarpagina",compact('global'))->render());
+
+}
 
 
     }
@@ -172,7 +190,7 @@ return response()->json(view ("inicio/modal.mirarnoticiainicio",compact('global'
        }
         return response()->json(view ("inicio/modal.mirartesiinicio",compact('global'))->render());
 
-     }else{
+     }else if($funcion=="tesisload"){
        $global=Tesi::orderBy('fecha', 'asc')->paginate(2);
 
        if($request->Ajax()){
@@ -184,6 +202,8 @@ return response()->json(view ("inicio/modal.mirarnoticiainicio",compact('global'
 
      }
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -267,15 +287,18 @@ public function descargartesi($id)
         if($request->ajax()){
           $output="";
             $query=$request->get('query');
+            $querycat=$request->cate;
+            if($query!='' && $querycat=="maestria"||$querycat=="doctorado"){
 
-            if($query!=''){
-              $data=DB::table('tesis')
-              ->where('titulo','like','%'.$query.'%')->paginate(2);
+              $data=DB::table('tesis')->where('titulo','like','%'.$query.'%')->where('grado','like','%'.$querycat.'%')->paginate(2);
 
+            }else if($query!="" && $querycat=="nulo"){
+
+              $data=DB::table('tesis')->where('titulo','like','%'.$query.'%')->paginate(2);
             }else{
 
-              $data=DB::table('tesis')
-              ->where('titulo','like','%'.$query.'%')->paginate(2);
+              $data=DB::table('tesis')->where('titulo','like','%'.$query.'%')->paginate(2);
+
             }
 
             $total_result=$data->count();

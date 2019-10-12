@@ -59,6 +59,7 @@
 																<form >
 
 																		<input type="search" name="search" id="Searchtesisinicio" placeholder="buscar">
+                                    <input type="hidden" name="categories" id="catecontenedor" value="">
 																			<button type="submit" id="buscartesisinicio" form="buscartes"><i class="fa fa-search" aria-hidden="true"></i></button>
 																</form>
 
@@ -71,6 +72,7 @@
 																<ul>
 																		<li><a href="#contenidos" name="maestria" id="maestriabusinicio" onclick="categoriabusinicio(this)">Maestría</a></li>
 																		<li><a href="#contenidos" name="doctorado" id="doctoradobusinicio" onclick="categoriabusinicio(this)">Doctorado</a></li>
+                                    <li><a href="#contenidos" name="todos" id="todosbusinicio" onclick="categoriabusinicio(this)">Todos</a></li>
 																		</ul>
 														</div>
 
