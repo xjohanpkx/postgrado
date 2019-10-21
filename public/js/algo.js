@@ -1134,11 +1134,23 @@ $("#guardanoti").val("noticiasload");
 
 //leer mas las noticias
 $(document).on('click', '#morenoticia', function(e){
-	e.preventDefault();
+	//e.preventDefault();
 	var id=$(this).data("id");
-	var url="/buscar/noticia/"+id+"";
-	$.get(url,function(res){
-	$('#contenedora').load('/loadnoti');
-	$("#titulnoti").append(res.titulonoti);
-  });
+	ruta="/buscar/noticia/"+id+"";
+
+
+			$.ajax({
+			url:ruta,
+			data:{},
+			type:'GET',
+			dataType:'json',
+			success:function(data){
+					$("#contenedora").html(data);
+
+			}
+
+			});
+
+
+
  });

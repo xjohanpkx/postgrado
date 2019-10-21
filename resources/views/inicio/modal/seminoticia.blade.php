@@ -8,7 +8,7 @@
                   <span>Por {{$noticiapub->autor}}   |{{$noticiapub->fechanoti}}</span>
 
                   <p style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 6;-webkit-box-orient: vertical;">{{$noticiapub->texto}}</p>
-                  <a href="#" id="morenoticia" data-id="{{$noticiapub->id}}" class="btn academy-btn btn-sm">Leer Màs</a>
+                  <a href="#contenedora" id="morenoticia" data-id="{{$noticiapub->id}}" class="btn academy-btn btn-sm">Leer Màs</a>
               </div>
               <div class="popular-course-thumb bg-img" style="background-image: url({{$noticiapub->directorio}});"></div>
           </div>

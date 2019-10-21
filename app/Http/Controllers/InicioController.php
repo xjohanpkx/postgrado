@@ -60,7 +60,7 @@ class InicioController extends Controller
                                           <span>Por '.$noticia->autor.' |'.$noticia->fechanoti.'</span>
 
                                           <p style="overflow: hidden;display: -webkit-box;-webkit-line-clamp: 6;-webkit-box-orient: vertical;">'.$noticia->texto.'</p>
-                                          <a href="#" id="morenoticia" data-id="'.$noticia->id.'" class="btn academy-btn btn-sm">Leer Màs</a>
+                                          <a href="#contenidos" id="morenoticia" data-id="'.$noticia->id.'" class="btn academy-btn btn-sm">Leer Màs</a>
                                       </div>
                                       <div class="popular-course-thumb bg-img" style="background-image: url('.$noticia->directorio.');"></div>
                                   </div>
@@ -523,8 +523,8 @@ public function descargartesi($id)
           {
             if($request->ajax()){
               $global=DB::table('noticias')
-              ->where('id','like',$id)->get();
-        return response()->json($global->toArray());
+              ->where('id','like','%'.$id.'%')->get();
+        return response()->json(view ("inicio/modal.mirarnoticiainicio0",compact('global'))->render());
         }}
 
 

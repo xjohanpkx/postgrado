@@ -14,25 +14,24 @@
 
                             <div class="academy-blog-posts">
               	                        <div class="row">
-
-
+		@foreach($global as $noticia)
               	                            <!-- Single Blog Start -->
               	                            <div class="col-12">
               	                                <div class="single-blog-post mb-50 wow fadeInUp" data-wow-delay="300ms">
               	                                    <!-- Post Thumb -->
               	                                    <div class="blog-post-thumb mb-50">
               	<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token2">
-              	                                        <img id="directorionoti" src="" style="max-height:300px; width:100%;" alt="">
+              	                                        <img id="directorionoti" src="{{$noticia->directorio}}" style="max-height:300px; width:100%;" alt="">
               																					     </div>
               	                                    <!-- Post Title -->
-              	                                    <a href="#" id="titulnoti" class="post-title"></a>
+              	                                    <a href="#" id="titulnoti" class="post-title">{{$noticia->titulonoti}}</a>
               	                                    <!-- Post Meta -->
               	                                    <div class="post-meta">
 
-              	                                        <p>Por <a href="#" id="autornoti"></a> | <a href="#" id="fechanoti"></a> |</p>
+              	                                        <p>Por <a href="#" id="autornoti">{{$noticia->autor}}</a> | <a href="#" id="fechanoti">{{$noticia->fechanoti}}</a> |</p>
               	                                    </div>
               	                                    <!-- Post Excerpt -->
-              	                                    <p style="font-size:14px;white-space: pre-wrap;" id="textnoti"></p>
+              	                                    <p style="font-size:14px;white-space: pre-wrap;" id="textnoti">{{$noticia->texto}}</p>
                                                         </div>
 
 
@@ -41,6 +40,7 @@
 
 
               	                        </div>
+                                          @endforeach
               	                    </div>
               	                    <!-- Pagination Area Start -->
               	                    <div class="academy-pagination-area wow fadeInUp" data-wow-delay="400ms">
